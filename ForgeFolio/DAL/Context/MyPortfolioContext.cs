@@ -5,9 +5,16 @@ namespace ForgeFolio.DAL.Context
 {
     public class MyPortfolioContext: DbContext
     {
+        public MyPortfolioContext(DbContextOptions<MyPortfolioContext> options) : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPortfolioDb; integrated Security=True");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Initial Catalog=MyPortfolioDb;Integrated Security=True");
+            }
         }
             public DbSet<About> Abouts { get; set; }
             public DbSet<Contact> Contacts { get; set; }
