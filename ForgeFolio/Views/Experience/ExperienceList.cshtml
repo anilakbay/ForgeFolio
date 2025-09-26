@@ -1,8 +1,81 @@
-﻿
+﻿@model List<Experience>
+
 @{
     ViewData["Title"] = "ExperienceList";
     Layout = "~/Views/Layout/Index.cshtml";
 }
 
-<h1>ExperienceList</h1>
+<div class="main-panel">
+	<div class="content">
+		<div class="container-fluid">
+			<h4 class="page-title">Experiences</h4>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Experience List</div>
+						</div>
+						<div class="card-body">
+							<div class="card-sub">
+								You can perform actions related to experiences from the panel below :
+							</div>
+							<table class="table mt-3">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Title</th>
+										<th scope="col">Job Title</th>
+										<th scope="col">Date</th>
+										<th scope="col">Delete</th>
+										<th scope="col">Update</th>
+									</tr>
+								</thead>
+								<tbody>
+									foreach(var item in Model)
+									{
+									<tr>
+										<td>item.id</td>
+										<td>item.Head</td>
+										<td>item.Title</td>
+										<td>item.Date</td>
+									</tr>
+									}								
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+										
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container-fluid">
+			<nav class="pull-left">
+				<ul class="nav">
+					<li class="nav-item">
+						<a class="nav-link" href="http://www.themekita.com">
+							ThemeKita
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							Help
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="https://themewagon.com/license/#free-item">
+							Licenses
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="copyright ml-auto">
+				2018, made with <i class="la la-heart heart text-danger"></i> by <a href="http://www.themekita.com">ThemeKita</a>
+			</div>
+		</div>
+	</footer>
+</div>
 

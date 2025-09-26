@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -8,142 +7,18 @@
  @await Component.InvokeAsync("_LayoutHeadComponentPartial")
 
 <body>
-	<div class="wrapper">
+    <div class="wrapper">
+
         @await Component.InvokeAsync("_LayoutNavbarComponentPartial")
 
+        @await Component.InvokeAsync("_LayoutSidebarComponentPartial")
 
-		<div class="sidebar">
-			<div class="scrollbar-inner sidebar-wrapper">
-				<div class="user">
-					<div class="photo">
-						<img src="assets/img/profile.jpg">
-					</div>
-					<div class="info">
-						<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-							<span>
-								Hizrian
-								<span class="user-level">Administrator</span>
-								<span class="caret"></span>
-							</span>
-						</a>
-						<div class="clearfix"></div>
+        @RenderBody()
 
-						<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
-							<ul class="nav">
-								<li>
-									<a href="#profile">
-										<span class="link-collapse">My Profile</span>
-									</a>
-								</li>
-								<li>
-									<a href="#edit">
-										<span class="link-collapse">Edit Profile</span>
-									</a>
-								</li>
-								<li>
-									<a href="#settings">
-										<span class="link-collapse">Settings</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<ul class="nav">
-					<li class="nav-item">
-						<a href="index.html">
-							<i class="la la-dashboard"></i>
-							<p>Dashboard</p>
-							<span class="badge badge-count">5</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="components.html">
-							<i class="la la-table"></i>
-							<p>Components</p>
-							<span class="badge badge-count">14</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="forms.html">
-							<i class="la la-keyboard-o"></i>
-							<p>Forms</p>
-							<span class="badge badge-count">50</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="tables.html">
-							<i class="la la-th"></i>
-							<p>Tables</p>
-							<span class="badge badge-count">6</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="notifications.html">
-							<i class="la la-bell"></i>
-							<p>Notifications</p>
-							<span class="badge badge-success">3</span>
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a href="typography.html">
-							<i class="la la-font"></i>
-							<p>Typography</p>
-							<span class="badge badge-danger">25</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="icons.html">
-							<i class="la la-fonticons"></i>
-							<p>Icons</p>
-						</a>
-					</li>
-					<li class="nav-item update-pro">
-						<button data-toggle="modal" data-target="#modalUpdate">
-							<i class="la la-hand-pointer-o"></i>
-							<p>Update To Pro</p>
-						</button>
-					</li>
-				</ul>
-			</div>
-		</div>
-		@RenderBody()
-	</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header bg-primary">
-					<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body text-center">
-					<p>Currently the pro version of the <b>Ready Dashboard</b> Bootstrap is in progress development</p>
-					<p>
-						<b>We'll let you know when it's done</b>
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    </div>
+    </div>
+
 </body>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/jquery.3.2.1.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/popper.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/bootstrap.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/chartist/chartist.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/chart-circle/circles.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="~/Ready-Bootstrap-Dashboard-master/assets/js/ready.min.js"></script>
+@await Component.InvokeAsync("_LayoutScriptComponentPartial")
+
 </html>
