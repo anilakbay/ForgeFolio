@@ -63,9 +63,10 @@ dotnet run
 ## 👨‍💻 Geliştirici
 
 **Anıl Akbay**
-- Email: anilakbay20@gmail.com
-- GitHub: [@anilakbay](https://github.com/anilakbay)
-- LinkedIn: [Anıl Akbay](https://linkedin.com/in/anilakbay)
+- **Email**: anilakbay20@gmail.com
+- **Telefon**: +90 546 593 80 36
+- **GitHub**: [@anilakbay](https://github.com/anilakbay)
+- **LinkedIn**: [Anıl Akbay](https://linkedin.com/in/anilakbay)
 
 ## 📄 Lisans
 
@@ -82,8 +83,10 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 ## 📞 İletişim
 
 Proje hakkında sorularınız için:
-- Email: anilakbay20@gmail.com
-- GitHub Issues: [Issues](https://github.com/anilakbay/ForgeFolio/issues)
+- **Email**: anilakbay20@gmail.com
+- **Telefon**: +90 546 593 80 36
+- **GitHub**: [@anilakbay](https://github.com/anilakbay)
+- **Repository**: [ForgeFolio](https://github.com/anilakbay/ForgeFolio)
 
 ---
 
