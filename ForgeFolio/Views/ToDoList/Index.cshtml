@@ -8,52 +8,114 @@
 
 <div class="content">
 	<div class="container-fluid">
-		<h4 class="page-title">Things to do</h4>
+		<div class="row mb-4">
+			<div class="col-md-8">
+				<h2 class="page-title">
+					<i class="fas fa-tasks text-primary me-2"></i>
+					Things to do
+				</h2>
+				<p class="text-muted">Manage your daily tasks and stay organized</p>
+			</div>
+			<div class="col-md-4 text-end">
+				<a href="/ToDoList/Create" class="btn btn-primary btn-lg">
+					<i class="fas fa-plus me-2"></i>
+					New Task
+				</a>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<div class="card-header">
-						<div class="card-title">To-Do List</div>
+					<div class="card-header bg-gradient-primary text-white">
+						<div class="card-title">
+							<i class="fas fa-list-check me-2"></i>
+							To-Do List
+						</div>
 					</div>
 					<div class="card-body">
-						<div class="card-sub">
+						<div class="alert alert-info border-0 mb-4">
+							<i class="fas fa-info-circle me-2"></i>
 							You can perform the tasks related to the items to be done from the panel below.
 						</div>
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Content</th>
-									<th scope="col">Date</th>
-									<th scope="col">Status</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-                                    count++;
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
 									<tr>
-										<td>@count</td>
-										<td>@item.Title</td>
-										<td>@item.Date</td>
-										@if (item.Status == true)
-										{
-											<td><a href="/ToDoList/MarkAsPending/@item.ToDoListId" class="btn btn-dark">Mark as not done!</a></td>
-										}
-										else
-										{
-											<td><a href="/ToDoList/MarkAsCompleted/@item.ToDoListId" class="btn btn-info">Mark as done!</a></td>
-										}				
-
-										<td><a href="/ToDoList/Delete/@item.ToDoListId" class="btn btn-danger">Delete</a></td>
-										<td><a href="/ToDoList/Edit/@item.ToDoListId" class="btn btn-success">Update</a></td>
+										<th scope="col" class="text-center">#</th>
+										<th scope="col">Task Content</th>
+										<th scope="col">Due Date</th>
+										<th scope="col" class="text-center">Status</th>
+										<th scope="col" class="text-center">Actions</th>
 									</tr>
-								}
-							</tbody>
-						</table>
-						<a href="/ToDoList/Create/" class="btn btn-primary">New Transaction Entry</a>
+								</thead>
+								<tbody>
+									@foreach (var item in Model)
+									{
+										count++;
+										<tr>
+											<td class="text-center">
+												<span class="badge bg-secondary">@count</span>
+											</td>
+											<td>
+												<div class="d-flex align-items-center">
+													@if (item.Status == true)
+													{
+														<i class="fas fa-check-circle text-success me-2"></i>
+														<span class="text-decoration-line-through text-muted">@item.Title</span>
+													}
+													else
+													{
+														<i class="fas fa-clock text-warning me-2"></i>
+														<span>@item.Title</span>
+													}
+												</div>
+											</td>
+											<td>
+												<span class="badge bg-info">@item.Date.ToString("dd.MM.yyyy")</span>
+											</td>
+											<td class="text-center">
+												@if (item.Status == true)
+												{
+													<a href="/ToDoList/MarkAsPending/@item.ToDoListId" class="btn btn-success btn-sm">
+														<i class="fas fa-undo me-1"></i>
+														Completed
+													</a>
+												}
+												else
+												{
+													<a href="/ToDoList/MarkAsCompleted/@item.ToDoListId" class="btn btn-warning btn-sm">
+														<i class="fas fa-check me-1"></i>
+														Mark as done
+													</a>
+												}
+											</td>
+											<td class="text-center">
+												<div class="btn-group" role="group">
+													<a href="/ToDoList/Edit/@item.ToDoListId" class="btn btn-outline-primary btn-sm">
+														<i class="fas fa-edit"></i>
+													</a>
+													<a href="/ToDoList/Delete/@item.ToDoListId" class="btn btn-outline-danger btn-sm">
+														<i class="fas fa-trash"></i>
+													</a>
+												</div>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+						@if (!Model.Any())
+						{
+							<div class="text-center py-5">
+								<i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+								<h5 class="text-muted">No tasks found</h5>
+								<p class="text-muted">Create your first task to get started!</p>
+								<a href="/ToDoList/Create" class="btn btn-primary">
+									<i class="fas fa-plus me-2"></i>
+									Create First Task
+								</a>
+							</div>
+						}
 					</div>
 				</div>
 			</div>
