@@ -5,13 +5,19 @@ namespace ForgeFolio.Controllers
 {
     public class StatisticController : Controller
     {
-        MyPortfolioContext context = new MyPortfolioContext();
+        private readonly MyPortfolioContext _context;
+
+        public StatisticController(MyPortfolioContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            ViewBag.v1 = context.Skills.Count();
-            ViewBag.v2 = context.Messages.Count();
-            ViewBag.v3 = context.Messages.Where(x => x.IsRead == false).Count();
-            ViewBag.v3 = context.Messages.Where(x => x.IsRead == true).Count();
+            ViewBag.TotalSkills = _context.Skills.Count();
+            ViewBag.TotalMessages = _context.Messages.Count();
+            ViewBag.UnreadMessages = _context.Messages.Where(x => x.IsRead == false).Count();
+            ViewBag.ReadMessages = _context.Messages.Where(x => x.IsRead == true).Count();
             return View();
         }
     }

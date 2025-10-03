@@ -38,16 +38,16 @@
                                         <td>@item.NameSurname</td>
                                         <td>@item.Subject</td>
                                         <td>@item.MessageDate.ToShortDateString()</td>
-                                        <td><a href="/Message/MessageDetails/@item.MessageId" class="btn btn-warning">Open Message</a></td>
+                                        <td><a href="/Message/Details/@item.MessageId" class="btn btn-warning">Open Message</a></td>
                                         @if (item.IsRead == true)
                                         {
-                                            <td><a href="/Message/ChangeIsReadToFalse/@item.MessageId" class="btn btn-dark">Mark as unread!</a></td>
+                                            <td><a href="/Message/MarkAsUnread/@item.MessageId" class="btn btn-dark">Mark as unread!</a></td>
                                         }
                                         else
                                         {
-                                            <td><a href="/Message/ChangeIsReadToTrue/@item.MessageId" class="btn btn-info">Mark as read!</a></td>
+                                            <td><a href="/Message/MarkAsRead/@item.MessageId" class="btn btn-info">Mark as read!</a></td>
                                         }
-                                        <td><a href="/Message/DeleteMessage/@item.MessageId" class="btn btn-danger">Delete</a></td>
+                                        <td><a href="/Message/Delete/@item.MessageId" class="btn btn-danger">Delete</a></td>
                                     </tr>
                                 }
                             </tbody>

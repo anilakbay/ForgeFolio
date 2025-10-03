@@ -6,47 +6,67 @@ namespace ForgeFolio.Controllers
 {
     public class ToDoListController : Controller
     {
-        MyPortfolioContext context = new MyPortfolioContext();
+        private readonly MyPortfolioContext _context;
+
+        public ToDoListController(MyPortfolioContext context)
+        {
+            _context = context;
+        }
         public IActionResult Index()
         {
-            var values = context.ToDoLists.ToList();
+            var values = _context.ToDoLists.ToList();
             return View(values);
         }
 
         [HttpGet]
-        public IActionResult CreateToDoList()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateToDoList(ToDoList toDoList)
+        public IActionResult Create(ToDoList toDoList)
         {
             toDoList.Status = false;
-            context.ToDoLists.Add(toDoList);
-            context.SaveChanges();
+            _context.ToDoLists.Add(toDoList);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        public IActionResult DeleteToDoList(int id)
+        public IActionResult Delete(int id)
         {
-            var value = context.ToDoLists.Find(id);
-            context.ToDoLists.Remove(value);
-            context.SaveChanges();
+            var value = _context.ToDoLists.Find(id);
+            _context.ToDoLists.Remove(value);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult UpdateToDoList(int id)
+        public IActionResult Edit(int id)
         {
-            var value = context.ToDoLists.Find(id);
+            var value = _context.ToDoLists.Find(id);
             return View(value);
         }
 
         [HttpPost]
-        public IActionResult UpdateToDoList(ToDoList toDoList)
+        public IActionResult Edit(ToDoList toDoList)
         {
-            var value = context.ToDoLists.Update(toDoList);          
-            context.SaveChanges();
+            _context.ToDoLists.Update(toDoList);          
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult MarkAsCompleted(int id)
+        {
+            var value = _context.ToDoLists.Find(id);
+            value.Status = true;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult MarkAsPending(int id)
+        {
+            var value = _context.ToDoLists.Find(id);
+            value.Status = false;
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

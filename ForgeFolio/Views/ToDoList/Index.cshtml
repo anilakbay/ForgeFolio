@@ -40,20 +40,20 @@
 										<td>@item.Date</td>
 										@if (item.Status == true)
 										{
-											<td><a href="/TodoList/ChangeIsReadToFalse/@item.ToDoListId" class="btn btn-dark">Mark as not done!</a></td>
+											<td><a href="/ToDoList/MarkAsPending/@item.ToDoListId" class="btn btn-dark">Mark as not done!</a></td>
 										}
 										else
 										{
-											<td><a href="/TodoList/ChangeIsReadToTrue/@item.ToDoListId" class="btn btn-info">Mark as done!</a></td>
+											<td><a href="/ToDoList/MarkAsCompleted/@item.ToDoListId" class="btn btn-info">Mark as done!</a></td>
 										}				
 
-										<td><a href="/ToDoList/DeleteToDoList/@item.ToDoListId" class="btn btn-danger">Delete</a></td>
-										<td><a href="/ToDoList/UpdateToDoList/@item.ToDoListId" class="btn btn-success">Update</a></td>
+										<td><a href="/ToDoList/Delete/@item.ToDoListId" class="btn btn-danger">Delete</a></td>
+										<td><a href="/ToDoList/Edit/@item.ToDoListId" class="btn btn-success">Update</a></td>
 									</tr>
 								}
 							</tbody>
 						</table>
-						<a href="/ToDoList/CreateToDoList/" class="btn btn-primary">New Transaction Entry</a>
+						<a href="/ToDoList/Create/" class="btn btn-primary">New Transaction Entry</a>
 					</div>
 				</div>
 			</div>

@@ -5,38 +5,43 @@ namespace ForgeFolio.Controllers
 {
     public class MessageController : Controller
     {
-        MyPortfolioContext context = new MyPortfolioContext();
+        private readonly MyPortfolioContext _context;
+
+        public MessageController(MyPortfolioContext context)
+        {
+            _context = context;
+        }
         public IActionResult Inbox()
         {
-            var values = context.Messages.ToList();
+            var values = _context.Messages.ToList();
             return View(values);
         }
-        public IActionResult ChangeIsReadToTrue(int id)
+        public IActionResult MarkAsRead(int id)
         {
-            var value = context.Messages.Find(id);
+            var value = _context.Messages.Find(id);
             value.IsRead = true;
-            context.Messages.Update(value);
-            context.SaveChanges();
+            _context.Messages.Update(value);
+            _context.SaveChanges();
             return RedirectToAction("Inbox");
         }
-        public IActionResult ChangeIsReadToFalse(int id)
+        public IActionResult MarkAsUnread(int id)
         {
-            var value = context.Messages.Find(id);
+            var value = _context.Messages.Find(id);
             value.IsRead = false;
-            context.Messages.Update(value);
-            context.SaveChanges();
+            _context.Messages.Update(value);
+            _context.SaveChanges();
             return RedirectToAction("Inbox");
         }
-        public IActionResult DeleteMessage(int id)
+        public IActionResult Delete(int id)
         {
-            var value = context.Messages.Find(id);
-            context.Messages.Remove(value);
-            context.SaveChanges();
+            var value = _context.Messages.Find(id);
+            _context.Messages.Remove(value);
+            _context.SaveChanges();
             return RedirectToAction("Inbox");
         }
-        public IActionResult MessageDetails(int id)
+        public IActionResult Details(int id)
         {
-            var value = context.Messages.Find(id);
+            var value = _context.Messages.Find(id);
             return View(value);
         }
     }

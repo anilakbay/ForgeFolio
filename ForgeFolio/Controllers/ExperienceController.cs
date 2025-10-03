@@ -6,10 +6,15 @@ namespace ForgeFolio.Controllers
 {
     public class ExperienceController : Controller
     {
-        MyPortfolioContext context = new MyPortfolioContext();
+        private readonly MyPortfolioContext _context;
+
+        public ExperienceController(MyPortfolioContext context)
+        {
+            _context = context;
+        }
         public IActionResult ExperienceList()
         {
-            var values = context.Experiences.ToList();
+            var values = _context.Experiences.ToList();
             return View(values);
         }
 
@@ -22,31 +27,31 @@ namespace ForgeFolio.Controllers
         [HttpPost]
         public IActionResult CreateExperience(Experience experience)
         {
-            context.Experiences.Add(experience);
-            context.SaveChanges();
+            _context.Experiences.Add(experience);
+            _context.SaveChanges();
             return RedirectToAction("ExperienceList");
         }
 
         public IActionResult DeleteExperience(int id)
         {
-            var value = context.Experiences.Find(id);
-            context.Experiences.Remove(value);
-            context.SaveChanges();
+            var value = _context.Experiences.Find(id);
+            _context.Experiences.Remove(value);
+            _context.SaveChanges();
             return RedirectToAction("ExperienceList");
         }
 
         [HttpGet]
         public IActionResult UpdateExperience(int id)
         {
-            var value = context.Experiences.Find(id);
+            var value = _context.Experiences.Find(id);
             return View(value);
         }
 
         [HttpPost]
         public IActionResult UpdateExperience(Experience experience)
         {
-            context.Experiences.Update(experience);
-            context.SaveChanges();
+            _context.Experiences.Update(experience);
+            _context.SaveChanges();
             return RedirectToAction("ExperienceList");
         }
 
