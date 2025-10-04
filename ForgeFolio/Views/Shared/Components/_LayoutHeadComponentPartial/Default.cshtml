@@ -1,180 +1,162 @@
 ﻿<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>ForgeFolio Admin Panel</title>
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-	<link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-	<link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/ready.css">
-	<link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/demo.css">
-	<style>
-		/* Modern Admin Panel Improvements */
-		.sidebar {
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			box-shadow: 0 0 20px rgba(0,0,0,0.1);
-		}
-		
-		.sidebar .nav-item a {
-			color: rgba(255,255,255,0.8);
-			transition: all 0.3s ease;
-			border-radius: 8px;
-			margin: 2px 8px;
-		}
-		
-		.sidebar .nav-item a:hover {
-			background: rgba(255,255,255,0.1);
-			color: white;
-			transform: translateX(5px);
-		}
-		
-		.sidebar .nav-item.active a {
-			background: rgba(255,255,255,0.2);
-			color: white;
-		}
-		
-		.main-panel {
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			min-height: 100vh;
-		}
-		
-		.content {
-			background: rgba(255, 255, 255, 0.95);
-			backdrop-filter: blur(10px);
-			border-radius: 20px;
-			margin: 20px;
-			padding: 30px;
-			box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-		}
-		
-		.card {
-			border: none;
-			border-radius: 20px;
-			background: rgba(255, 255, 255, 0.9);
-			backdrop-filter: blur(10px);
-			box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-			transition: all 0.3s ease;
-		}
-		
-		.card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-			background: rgba(255, 255, 255, 0.95);
-		}
-		
-		.btn {
-			border-radius: 12px;
-			font-weight: 500;
-			transition: all 0.3s ease;
-			border: none;
-			box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-		}
-		
-		.btn:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-		}
-		
-		.btn-primary {
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		}
-		
-		.btn-success {
-			background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-		}
-		
-		.btn-warning {
-			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-		}
-		
-		.btn-danger {
-			background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-		}
-		
-		.table {
-			border-radius: 10px;
-			overflow: hidden;
-		}
-		
-		.table thead th {
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			color: white;
-			border: none;
-			font-weight: 600;
-			padding: 15px;
-		}
-		
-		.table tbody tr {
-			transition: all 0.3s ease;
-			background: rgba(255, 255, 255, 0.8);
-		}
-		
-		.table tbody tr:hover {
-			background: rgba(102, 126, 234, 0.1);
-			transform: scale(1.01);
-		}
-		
-		.table tbody td {
-			padding: 15px;
-			border-bottom: 1px solid rgba(102, 126, 234, 0.1);
-		}
-		
-		.page-title {
-			color: #2c3e50;
-			font-weight: 700;
-			margin-bottom: 20px;
-			text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-		}
-		
-		.card-title {
-			color: #2c3e50;
-			font-weight: 600;
-			text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-		}
-		
-		.alert {
-			border-radius: 15px;
-			border: none;
-			box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-		}
-		
-		.alert-info {
-			background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-			color: white;
-		}
-		
-		/* Notification badge */
-		.notification {
-			background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-			animation: pulse 2s infinite;
-		}
-		
-		@@keyframes pulse {
-			0% { transform: scale(1); }
-			50% { transform: scale(1.1); }
-			100% { transform: scale(1); }
-		}
-		
-		/* Profile section */
-		.user .photo img {
-			border: 3px solid rgba(255,255,255,0.3);
-			transition: all 0.3s ease;
-		}
-		
-		.user .photo img:hover {
-			border-color: rgba(255,255,255,0.8);
-			transform: scale(1.05);
-		}
-		
-		/* Responsive improvements */
-		@@media (max-width: 768px) {
-			.sidebar {
-				transform: translateX(-100%);
-				transition: transform 0.3s ease;
-			}
-			
-			.sidebar.show {
-				transform: translateX(0);
-			}
-		}
-	</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>ForgeFolio Admin Panel</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport" />
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/ready.css">
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/demo.css">
+    <style>
+        /* Sidebar */
+        .sidebar {
+            background: rgba(44, 62, 80, 0.85); /* koyu ama şeffaf */
+            backdrop-filter: blur(10px); /* arka plan blur efekti */
+            box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+        }
+
+
+            .sidebar .nav-item a {
+                color: #bdc3c7;
+                padding: 12px 18px;
+                display: block;
+                border-radius: 6px;
+                transition: 0.2s ease-in-out;
+                font-size: 15px;
+            }
+
+                .sidebar .nav-item a:hover {
+                    background: #34495e;
+                    color: #fff;
+                }
+
+            .sidebar .nav-item.active a {
+                background: #1abc9c;
+                color: #fff;
+                font-weight: 600;
+            }
+
+        /* Main Panel */
+        .main-panel {
+            background: #f8f9fc; /* Açık gri, temiz görünüm */
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Content Area */
+        .content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Cards */
+        .card {
+            border-radius: 10px;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            }
+
+        /* Buttons */
+        .btn {
+            border-radius: 6px;
+            font-weight: 500;
+            padding: 8px 16px;
+            transition: background 0.2s ease, opacity 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #3498db;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Tables */
+        .table thead th {
+            background: #3498db;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            padding: 12px;
+        }
+
+        .table tbody td {
+            padding: 12px;
+        }
+
+        .table tbody tr:hover {
+            background: #f2f6fc;
+        }
+
+        /* Titles */
+        .page-title {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* Alerts */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 12px 18px;
+        }
+
+        .alert-info {
+            background: #3498db;
+            color: #fff;
+        }
+
+        /* Notification badge */
+        .notification {
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Responsive improvements */
+        @@media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+                .sidebar.show {
+                    transform: translateX(0);
+                }
+        }
+    </style>
 </head>
