@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForgeFolio.Migrations
 {
     [DbContext(typeof(MyPortfolioContext))]
-    [Migration("20251002212716_mig2")]
-    partial class mig2
+    [Migration("20251020130241_deniz")]
+    partial class deniz
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
