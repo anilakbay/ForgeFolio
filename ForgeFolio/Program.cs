@@ -6,7 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Ýlk deploy için sadece production DB kullanýyoruz
 builder.Services.AddDbContext<MyPortfolioContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+        {
+            // Baðlantý koparsa otomatik tekrar dene
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null);
+        }));
 
 builder.Services.AddControllersWithViews();
 
