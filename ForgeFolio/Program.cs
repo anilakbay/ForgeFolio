@@ -4,17 +4,20 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Ýlk deploy için sadece production DB kullanýyoruz
+// Bolt Database PostgreSQL baðlantýsý
 builder.Services.AddDbContext<MyPortfolioContext>(options =>
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        sqlOptions =>
+        npgsqlOptions =>
         {
             // Baðlantý koparsa otomatik tekrar dene
-            sqlOptions.EnableRetryOnFailure(
+            npgsqlOptions.EnableRetryOnFailure(
                 maxRetryCount: 5,
                 maxRetryDelay: TimeSpan.FromSeconds(10),
-                errorNumbersToAdd: null);
+                errorCodesToAdd: null);
+
+            // Timeout ayarlarý
+            npgsqlOptions.CommandTimeout(30);
         }));
 
 builder.Services.AddControllersWithViews();
@@ -25,12 +28,12 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     // Production ortamý
-    app.UseExceptionHandler("/Home/Error"); // Kullanýcýya hata sayfasý gösterir
-    app.UseHsts(); // Güvenlik için
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 else
 {
-    // Local development (Visual Studio’da test ederken)
+    // Local development
     app.UseDeveloperExceptionPage();
 }
 

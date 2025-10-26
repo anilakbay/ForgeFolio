@@ -11,11 +11,13 @@ namespace ForgeFolio.Controllers
         {
             _context = context;
         }
+
         public IActionResult Inbox()
         {
             var values = _context.Messages.ToList();
             return View(values);
         }
+
         public IActionResult MarkAsRead(int id)
         {
             var value = _context.Messages.Find(id);
@@ -24,6 +26,7 @@ namespace ForgeFolio.Controllers
             _context.SaveChanges();
             return RedirectToAction("Inbox");
         }
+
         public IActionResult MarkAsUnread(int id)
         {
             var value = _context.Messages.Find(id);
@@ -32,13 +35,7 @@ namespace ForgeFolio.Controllers
             _context.SaveChanges();
             return RedirectToAction("Inbox");
         }
-        public IActionResult Delete(int id)
-        {
-            var value = _context.Messages.Find(id);
-            _context.Messages.Remove(value);
-            _context.SaveChanges();
-            return RedirectToAction("Inbox");
-        }
+
         public IActionResult Details(int id)
         {
             var value = _context.Messages.Find(id);

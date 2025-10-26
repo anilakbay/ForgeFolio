@@ -12,6 +12,7 @@ namespace ForgeFolio.Controllers
         {
             _context = context;
         }
+
         public IActionResult ExperienceList()
         {
             var values = _context.Experiences.ToList();
@@ -35,8 +36,11 @@ namespace ForgeFolio.Controllers
         public IActionResult DeleteExperience(int id)
         {
             var value = _context.Experiences.Find(id);
-            _context.Experiences.Remove(value);
-            _context.SaveChanges();
+            if (value != null)
+            {
+                _context.Experiences.Remove(value);
+                _context.SaveChanges();
+            }
             return RedirectToAction("ExperienceList");
         }
 
@@ -54,6 +58,5 @@ namespace ForgeFolio.Controllers
             _context.SaveChanges();
             return RedirectToAction("ExperienceList");
         }
-
     }
 }
