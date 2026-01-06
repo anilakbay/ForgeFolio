@@ -1,4 +1,5 @@
 using ForgeFolio.Core.Interfaces;
+using ForgeFolio.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForgeFolio.Infrastructure.Data.Repositories;

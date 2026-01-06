@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 using ForgeFolio.Core.DTOs.Feature;
+=======
+>>>>>>> anildev
 using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+<<<<<<< HEAD
 namespace ForgeFolio.Controllers;
 
 [Authorize(Roles = "Admin")]
@@ -76,5 +80,24 @@ public class FeatureController : Controller
     {
         await _featureService.DeleteFeatureAsync(id);
         return RedirectToAction("Index");
+=======
+namespace ForgeFolio.Controllers
+{
+    // [Authorize(Roles = "Admin")] // Temporarily disabled
+    public class FeatureController : Controller
+    {
+        private readonly IFeatureService _featureService;
+
+        public FeatureController(IFeatureService featureService)
+        {
+            _featureService = featureService;
+        }
+
+        public IActionResult Index()
+        {
+            // TODO: Fetch real data - var features = await _featureService.GetAllFeaturesAsync();
+            return View();
+        }
+>>>>>>> anildev
     }
 }

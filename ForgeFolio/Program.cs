@@ -52,7 +52,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Business Services
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IAboutService, AboutService>();
+builder.Services.AddScoped<ISkillService, SkillService>();
 builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
 
 builder.Services.AddScoped<IToDoListService, ToDoListService>();
 builder.Services.AddScoped<IStatisticService, StatisticService>();

@@ -12,18 +12,31 @@ public class SkillService : ISkillService
 
     public SkillService(IRepository<Skill> repository, IUnitOfWork unitOfWork)
     {
+<<<<<<< HEAD
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+=======
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+>>>>>>> anildev
     }
 
     public async Task<IEnumerable<SkillDto>> GetAllSkillsAsync()
     {
         var skills = await _repository.GetAllAsync();
+<<<<<<< HEAD
         return skills.Select(x => new SkillDto
         {
             Id = x.Id,
             Title = x.Title,
             Value = x.Value
+=======
+        return skills.Select(s => new SkillDto
+        {
+            Id = s.Id,
+            Title = s.Title,
+            Value = s.Value
+>>>>>>> anildev
         });
     }
 
@@ -40,7 +53,11 @@ public class SkillService : ISkillService
         };
     }
 
+<<<<<<< HEAD
     public async Task CreateSkillAsync(CreateSkillDto dto)
+=======
+    public async Task<SkillDto> CreateSkillAsync(CreateSkillDto dto)
+>>>>>>> anildev
     {
         var skill = new Skill
         {
@@ -50,13 +67,27 @@ public class SkillService : ISkillService
 
         await _repository.AddAsync(skill);
         await _unitOfWork.SaveChangesAsync();
+<<<<<<< HEAD
+=======
+
+        return new SkillDto
+        {
+            Id = skill.Id,
+            Title = skill.Title,
+            Value = skill.Value
+        };
+>>>>>>> anildev
     }
 
     public async Task UpdateSkillAsync(int id, UpdateSkillDto dto)
     {
         var skill = await _repository.GetByIdAsync(id);
+<<<<<<< HEAD
         if (skill == null)
             throw new Exception($"Skill with ID {id} not found");
+=======
+        if (skill == null) throw new KeyNotFoundException($"Skill with ID {id} not found");
+>>>>>>> anildev
 
         skill.Title = dto.Title;
         skill.Value = dto.Value;

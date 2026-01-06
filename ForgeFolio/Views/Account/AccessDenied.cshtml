@@ -1,6 +1,5 @@
-﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Erişim Engellendi";
     Layout = null;
 }
 
@@ -9,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hata - ForgeFolio</title>
+    <title>@ViewData["Title"] - ForgeFolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
@@ -29,7 +28,7 @@
             padding: 1rem;
         }
 
-        .error-container {
+        .access-denied-container {
             max-width: 900px;
             width: 100%;
             background: white;
@@ -40,9 +39,9 @@
             min-height: 400px;
         }
 
-        .error-brand {
+        .denied-brand {
             flex: 1;
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
             padding: 3rem;
             color: white;
             display: flex;
@@ -52,25 +51,23 @@
             text-align: center;
         }
 
-        .error-icon {
+        .denied-icon {
             font-size: 5rem;
             margin-bottom: 1.5rem;
-            opacity: 0.9;
         }
 
-        .error-title {
-            font-size: 2rem;
+        .denied-code {
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
-        .error-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            line-height: 1.6;
+        .denied-title {
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
-        .error-content {
+        .denied-content {
             flex: 1;
             padding: 3rem;
             display: flex;
@@ -78,108 +75,119 @@
             justify-content: center;
         }
 
-        .error-content h2 {
+        .denied-content h2 {
             font-size: 1.5rem;
             color: #2d3748;
             margin-bottom: 1rem;
         }
 
-        .error-content p {
+        .denied-content p {
             color: #718096;
             line-height: 1.8;
             margin-bottom: 1.5rem;
         }
 
-        .request-id {
-            background: #f7fafc;
-            border-left: 4px solid #007bff;
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
             padding: 1rem;
             border-radius: 4px;
             margin: 1.5rem 0;
+            color: #856404;
         }
 
-        .request-id small {
-            color: #4a5568;
-            font-size: 0.9rem;
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .request-id strong {
-            color: #2d3748;
-            font-family: monospace;
-        }
-
-        .btn-home {
+        .btn {
             display: inline-block;
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-            color: white;
-            text-decoration: none;
+            padding: 0.875rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s ease;
             text-align: center;
         }
 
-        .btn-home:hover {
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,123,255,0.3);
             color: white;
             text-decoration: none;
         }
 
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
         @@media (max-width: 768px) {
-            .error-container {
+            .access-denied-container {
                 flex-direction: column;
-                min-height: auto;
             }
 
-            .error-brand {
+            .denied-brand, .denied-content {
                 padding: 2rem;
             }
 
-            .error-content {
-                padding: 2rem;
-            }
-
-            .error-icon {
+            .denied-icon {
                 font-size: 3.5rem;
             }
 
-            .error-title {
-                font-size: 1.5rem;
+            .denied-code {
+                font-size: 2.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <div class="error-container">
-        <div class="error-brand">
-            <div class="error-icon">
-                <i class="fas fa-exclamation-triangle"></i>
+    <div class="access-denied-container">
+        <div class="denied-brand">
+            <div class="denied-icon">
+                <i class="fas fa-lock"></i>
             </div>
-            <div class="error-title">Oops!</div>
-            <div class="error-subtitle">
-                Bir şeyler ters gitti
-            </div>
+            <div class="denied-code">403</div>
+            <div class="denied-title">Erişim Engellendi</div>
         </div>
 
-        <div class="error-content">
-            <h2>Beklenmeyen Bir Hata Oluştu</h2>
+        <div class="denied-content">
+            <h2>Bu Sayfaya Erişim Yetkiniz Yok</h2>
             <p>
-                İsteğinizi işlerken bir sorun yaşadık. Lütfen daha sonra tekrar deneyin 
-                veya sorun devam ederse destek ekibimizle iletişime geçin.
+                Erişmeye çalıştığınız sayfa sadece yetkili kullanıcılar içindir. 
+                Bu sayfayı görüntülemek için gerekli izinlere sahip değilsiniz.
             </p>
 
-            @if (Model.ShowRequestId)
-            {
-                <div class="request-id">
-                    <small>Destek ID: <strong>@Model.RequestId</strong></small>
-                </div>
-            }
+            <div class="info-box">
+                <strong>Ne yapabilirsiniz?</strong><br>
+                Eğer bu sayfaya erişmeniz gerektiğini düşünüyorsanız, lütfen sistem yöneticinizle iletişime geçin.
+            </div>
 
-            <a asp-action="Index" asp-controller="Default" class="btn-home">
-                <i class="fas fa-home"></i> Ana Sayfaya Dön
-            </a>
+            <div class="btn-group">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Ana Sayfa
+                </a>
+                <a href="javascript:history.back()" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Geri Dön
+                </a>
+            </div>
         </div>
     </div>
 </body>

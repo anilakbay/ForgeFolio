@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 using ForgeFolio.Core.DTOs.SocialMedia;
 using ForgeFolio.Core.Interfaces.Services;
+=======
+>>>>>>> anildev
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.Controllers;
 
+<<<<<<< HEAD
 [Authorize(Roles = "Admin")]
 public class SocialMediaController : Controller
 {
@@ -75,4 +79,17 @@ public class SocialMediaController : Controller
         await _socialMediaService.DeleteSocialMediaAsync(id);
         return RedirectToAction("Index");
     }
+=======
+/// <summary>
+/// Social Media management controller
+/// </summary>
+// [Authorize(Roles = "Admin")] // Temporarily disabled
+public class SocialMediaController : Controller
+{
+    // Simple Index action - no service needed yet
+    public IActionResult Index()
+    {
+        return View();
+    }
+>>>>>>> anildev
 }

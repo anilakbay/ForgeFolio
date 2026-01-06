@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @model ForgeFolio.Core.DTOs.About.AboutDto
 @{
     ViewData["Title"] = "About";
@@ -32,3 +33,58 @@
         }
     </div>
 </div>
+=======
+@{
+    ViewData["Title"] = "Hakkımda";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Hakkımda Bilgileri</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">About</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Hakkımda Düzenle</h3>
+            </div>
+            <form>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Başlık</label>
+                        <input type="text" class="form-control" placeholder="Örn: Web Developer" value="Full Stack Developer">
+                    </div>
+                    <div class="form-group">
+                        <label>Açıklama</label>
+                        <textarea class="form-control" rows="5">5+ yıl deneyimli Full Stack Developer. ASP.NET Core, React, ve modern web teknolojileri üzerine uzmanım.</textarea>
+</div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="text" class="form-control" value="+90 555 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="info@forgefolio.com">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+>>>>>>> anildev

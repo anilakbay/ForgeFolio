@@ -12,14 +12,25 @@ public class AboutService : IAboutService
 
     public AboutService(IRepository<About> repository, IUnitOfWork unitOfWork)
     {
+<<<<<<< HEAD
         _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+=======
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+>>>>>>> anildev
     }
 
     public async Task<AboutDto?> GetAboutAsync()
     {
+<<<<<<< HEAD
         var abouts = await _repository.GetAllAsync();
         var about = abouts.FirstOrDefault();
+=======
+        var allAbout = await _repository.GetAllAsync();
+        var about = allAbout.FirstOrDefault();
+        
+>>>>>>> anildev
         if (about == null) return null;
 
         return new AboutDto
@@ -33,6 +44,7 @@ public class AboutService : IAboutService
 
     public async Task UpdateAboutAsync(UpdateAboutDto dto)
     {
+<<<<<<< HEAD
         var about = await _repository.GetByIdAsync(dto.Id);
         
         // If not exists (first time), check if we can add? Usually About is singleton-ish in portfolio
@@ -63,6 +75,29 @@ public class AboutService : IAboutService
         about.Details = dto.Details;
 
         await _repository.UpdateAsync(about);
+=======
+        var allAbout = await _repository.GetAllAsync();
+        var about = allAbout.FirstOrDefault();
+        
+        if (about == null)
+        {
+            about = new About
+            {
+                Title = dto.Title,
+                SubDescription = dto.SubDescription,
+                Details = dto.Details
+            };
+            await _repository.AddAsync(about);
+        }
+        else
+        {
+            about.Title = dto.Title;
+            about.SubDescription = dto.SubDescription;
+            about.Details = dto.Details;
+            await _repository.UpdateAsync(about);
+        }
+
+>>>>>>> anildev
         await _unitOfWork.SaveChangesAsync();
     }
 }

@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 using ForgeFolio.Core.DTOs.Testimonial;
 using ForgeFolio.Core.Interfaces.Services;
+=======
+>>>>>>> anildev
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.Controllers;
 
+<<<<<<< HEAD
 [Authorize(Roles = "Admin")]
 public class TestimonialController : Controller
 {
@@ -76,4 +80,17 @@ public class TestimonialController : Controller
         await _testimonialService.DeleteTestimonialAsync(id);
         return RedirectToAction("Index");
     }
+=======
+/// <summary>
+/// Testimonial management controller
+/// </summary>
+// [Authorize(Roles = "Admin")] // Temporarily disabled
+public class TestimonialController : Controller
+{
+    // Simple Index action - no service needed yet
+    public IActionResult Index()
+    {
+        return View();
+    }
+>>>>>>> anildev
 }

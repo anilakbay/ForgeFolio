@@ -1,60 +1,288 @@
-﻿﻿
-    @{
-        Layout = null;
-    }
+﻿﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
-    <!DOCTYPE html>
-
-    <html class="no-js" lang="en">
-
-    @await Component.InvokeAsync("_HeadComponentPartial")
-
-    <body id="top">
-        
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <div class="alert alert-success" style="position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 15px; background: #4CAF50; color: white; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                @TempData["SuccessMessage"]
+<!-- Content Header -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
             </div>
-        }
-        
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger" style="position: fixed; top: 20px; right: 20px; z-index: 9999; padding: 15px; background: #f44336; color: white; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                @TempData["ErrorMessage"]
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
             </div>
-        }
+        </div>
+    </div>
+</div>
 
-        @await Component.InvokeAsync("_NavbarComponentPartial")
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-briefcase"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Portfolio</span>
+                        <span class="info-box-number">
+                            12
+                            <small>proje</small>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-        @await Component.InvokeAsync("_FeatureComponentPartial")
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-star"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Features</span>
+                        <span class="info-box-number">8</span>
+                    </div>
+                </div>
+            </div>
 
-        @await Component.InvokeAsync("_AboutComponentPartial")
+            <div class="clearfix hidden-md-up"></div>
 
-        @await Component.InvokeAsync("_PortfolioComponentPartial")
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-envelope"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Mesajlar</span>
+                        <span class="info-box-number">24</span>
+                    </div>
+                </div>
+            </div>
 
-        @await Component.InvokeAsync("_TestimonialComponentPartial")
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Bekleyen Görevler</span>
+                        <span class="info-box-number">5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        @await Component.InvokeAsync("_StatisticComponentPartial")
+        <!-- Charts Row -->
+        <div class="row">
+            <!-- Pie Chart -->
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Portfolio Dağılımı</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="portfolioPieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
 
-        @await Component.InvokeAsync("_ContactComponentPartial")
+            <!-- Bar Chart -->
+            <div class="col-md-6">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Aylık Aktivite</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="monthlyBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        @await Component.InvokeAsync("_FooterComponentPartial")
+        <!-- Recent Activity & Tasks -->
+        <div class="row">
+            <!-- Recent Portfolio Items -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">Son Eklenen Portfolio</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Proje</th>
+                                        <th>Tarih</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="#">E-Ticaret Platformu</a></td>
+                                        <td>05 Ocak 2026</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Mobil Uygulama</a></td>
+                                        <td>03 Ocak 2026</td>
+                                        <td><span class="badge badge-warning">Devam Ediyor</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Web Sitesi Tasarımı</a></td>
+                                        <td>01 Ocak 2026</td>
+                                        <td><span class="badge badge-success">Aktif</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">API Geliştirme</a></td>
+                                        <td>28 Ara 2025</td>
+                                        <td><span class="badge badge-danger">Bekliyor</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <a asp-controller="Portfolio" asp-action="Index" class="btn btn-sm btn-primary float-right">Tümünü Gör</a>
+                    </div>
+                </div>
+            </div>
 
-    </body>
+            <!-- To-Do List -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Bekleyen Görevler</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="todo-list" data-widget="todo-list">
+                            <li>
+                                <span class="handle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                                <div class="icheck-primary d-inline ml-2">
+                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                    <label for="todoCheck1"></label>
+                                </div>
+                                <span class="text">Portfolio sayfasını güncelle</span>
+                                <small class="badge badge-danger"><i class="far fa-clock"></i> Bugün</small>
+                            </li>
+                            <li>
+                                <span class="handle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                                <div class="icheck-primary d-inline ml-2">
+                                    <input type="checkbox" value="" name="todo2" id="todoCheck2">
+                                    <label for="todoCheck2"></label>
+                                </div>
+                                <span class="text">Mesajlara cevap ver</span>
+                                <small class="badge badge-warning"><i class="far fa-clock"></i> Yarın</small>
+                            </li>
+                            <li>
+                                <span class="handle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </span>
+                                <div class="icheck-primary d-inline ml-2">
+                                    <input type="checkbox" value="" name="todo3" id="todoCheck3">
+                                    <label for="todoCheck3"></label>
+                                </div>
+                                <span class="text">Yeni özellikler ekle</span>
+                                <small class="badge badge-info"><i class="far fa-clock"></i> Bu Hafta</small>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <a asp-controller="ToDoList" asp-action="Index" class="btn btn-sm btn-primary float-right">Tümünü Gör</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Auto-hide alerts after 5 seconds
-        setTimeout(function() {
-            var alerts = document.querySelectorAll('.alert');
-            alerts.forEach(function(alert) {
-                alert.style.opacity = '0';
-                alert.style.transition = 'opacity 0.5s';
-                setTimeout(function() {
-                    alert.remove();
-                }, 500);
-            });
-        }, 5000);
-    </script>
+        // Portfolio Pie Chart
+        var pieChartCanvas = document.getElementById('portfolioPieChart').getContext('2d');
+        var pieData = {
+            labels: [
+                'Web Uygulamaları',
+                'Mobil Uygulamalar',
+                'Tasarım Projeleri',
+                'Diğer'
+            ],
+            datasets: [{
+                data: [5, 3, 2, 2],
+                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545'],
+            }]
+        };
+        var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        };
+        new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+        });
 
-    </html>
+        // Monthly Bar Chart
+        var barChartCanvas = document.getElementById('monthlyBarChart').getContext('2d');
+        var barData = {
+            labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
+            datasets: [{
+                label: 'Tamamlanan Projeler',
+                backgroundColor: 'rgba(40, 167, 69, 0.8)',
+                borderColor: 'rgba(40, 167, 69, 1)',
+                borderWidth: 1,
+                data: [3, 5, 2, 4, 6, 3]
+            }]
+        };
+        var barOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        };
+        new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barData,
+            options: barOptions
+        });
+    </script>
+}
+
