@@ -1,3 +1,4 @@
+using ForgeFolio.Core.DTOs.Message;
 using ForgeFolio.Core.Entities;
 using ForgeFolio.Core.Interfaces;
 using ForgeFolio.Core.Interfaces.Services;
