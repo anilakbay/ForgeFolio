@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Deneyimler Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "🎓";
 }
 
 <div class="content-header">
@@ -8,6 +9,12 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">@ViewData["Title"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Experience</li>
+                </ol>
             </div>
         </div>
     </div>
@@ -20,10 +27,14 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">İş Deneyimleri</h3>
+                <div class="card-tools">
+                    <a asp-action="CreateExperience" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Yeni Deneyim Ekle
+                    </a>
+                </div>
             </div>
             <div class="card-body">
-                <p>Deneyimler yönetim sayfası yakında eklenecek.</p>
-                <a href="/Experience/CreateExperience" class="btn btn-primary">Yeni Deneyim Ekle</a>
+                <p>Deneyimler yönetim sayfası. Servis entegrasyonu için TODO controller'da.</p>
             </div>
         </div>
     </div>
