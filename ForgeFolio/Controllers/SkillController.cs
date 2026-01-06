@@ -90,10 +90,10 @@ namespace ForgeFolio.Controllers
             _skillService = skillService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // TODO: Fetch real data - var skills = await _skillService.GetAllSkillsAsync();
-            return View();
+            var skills = await _skillService.GetAllSkillsAsync();
+            return View(skills);
         }
 <<<<<<< HEAD
 >>>>>>> anildev
@@ -102,38 +102,91 @@ namespace ForgeFolio.Controllers
         [HttpGet]
         public IActionResult CreateSkill()
         {
-            // TODO: Return create form view
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateSkill(string Title, int Value)
+        public async Task<IActionResult> CreateSkill(ForgeFolio.Core.DTOs.Skill.CreateSkillDto dto)
         {
-            // TODO: Service integration - await _skillService.CreateSkillAsync(dto);
-            TempData["SuccessMessage"] = "Skill başarıyla eklendi!";
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+
+            try
+            {
+                await _skillService.CreateSkillAsync(dto);
+                TempData["SuccessMessage"] = "Skill başarıyla eklendi!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+                return View(dto);
+            }
         }
 
         [HttpGet]
-        public IActionResult UpdateSkill(int id)
+        public async Task<IActionResult> UpdateSkill(int id)
         {
-            // TODO: Fetch skill by id and return edit form
-            return View();
+            var skill = await _skillService.GetSkillByIdAsync(id);
+            if (skill == null)
+            {
+                TempData["ErrorMessage"] = "Skill bulunamadı!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var updateDto = new ForgeFolio.Core.DTOs.Skill.UpdateSkillDto
+            {
+                Title = skill.Title,
+                Value = skill.Value
+            };
+
+            ViewBag.Id = id;
+            return View(updateDto);
         }
 
         [HttpPost]
-        public IActionResult UpdateSkill(int id, string Title, int Value)
+        public async Task<IActionResult> UpdateSkill(int id, ForgeFolio.Core.DTOs.Skill.UpdateSkillDto dto)
         {
-            // TODO: Service integration - await _skillService.UpdateSkillAsync(id, dto);
-            TempData["SuccessMessage"] = "Skill başarıyla güncellendi!";
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Id = id;
+                return View(dto);
+            }
+
+            try
+            {
+                await _skillService.UpdateSkillAsync(id, dto);
+                TempData["SuccessMessage"] = "Skill başarıyla güncellendi!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (KeyNotFoundException)
+            {
+                TempData["ErrorMessage"] = "Skill bulunamadı!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+                ViewBag.Id = id;
+                return View(dto);
+            }
         }
 
         [HttpGet]
-        public IActionResult DeleteSkill(int id)
+        public async Task<IActionResult> DeleteSkill(int id)
         {
-            // TODO: Delete skill and redirect to Index
-            TempData["SuccessMessage"] = "Skill deleted successfully!";
+            try
+            {
+                await _skillService.DeleteSkillAsync(id);
+                TempData["SuccessMessage"] = "Skill başarıyla silindi!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+            }
+
             return RedirectToAction(nameof(Index));
         }
 >>>>>>> anildev

@@ -1,90 +1,11 @@
-<<<<<<< HEAD
 using ForgeFolio.Core.DTOs.Portfolio;
-=======
->>>>>>> anildev
 using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-<<<<<<< HEAD
-namespace ForgeFolio.Controllers;
-
-[Authorize(Roles = "Admin")]
-public class PortfolioController : Controller
-{
-    private readonly IPortfolioService _portfolioService;
-
-    public PortfolioController(IPortfolioService portfolioService)
-    {
-        _portfolioService = portfolioService;
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Index(int page = 1)
-    {
-        int pageSize = 5;
-        var values = await _portfolioService.GetAllPortfoliosPaginatedAsync(page, pageSize);
-        return View(values);
-    }
-
-    [HttpGet]
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create(CreatePortfolioDto createPortfolioDto)
-    {
-        if (ModelState.IsValid)
-        {
-            await _portfolioService.CreatePortfolioAsync(createPortfolioDto);
-            return RedirectToAction("Index");
-        }
-        return View(createPortfolioDto);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Update(int id)
-    {
-        var value = await _portfolioService.GetPortfolioByIdAsync(id);
-        if (value == null)
-        {
-            return NotFound();
-        }
-
-        var updateDto = new UpdatePortfolioDto
-        {
-            Id = value.Id,
-            Title = value.Title,
-            SubTitle = value.SubTitle,
-            ImageUrl = value.ImageUrl,
-            Url = value.Url,
-            Description = value.Description
-        };
-
-        return View(updateDto);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Update(UpdatePortfolioDto updatePortfolioDto)
-    {
-        if (ModelState.IsValid)
-        {
-            await _portfolioService.UpdatePortfolioAsync(updatePortfolioDto.Id, updatePortfolioDto);
-            return RedirectToAction("Index");
-        }
-        return View(updatePortfolioDto);
-    }
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        await _portfolioService.DeletePortfolioAsync(id);
-        return RedirectToAction("Index");
-=======
 namespace ForgeFolio.Controllers
 {
-    // [Authorize(Roles = "Admin")] // Temporarily disabled for testing
+    // [Authorize(Roles = "Admin")] // TODO: Enable after testing
     public class PortfolioController : Controller
     {
         private readonly IPortfolioService _portfolioService;
@@ -94,52 +15,104 @@ namespace ForgeFolio.Controllers
             _portfolioService = portfolioService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // TODO: Fetch real data - var portfolios = await _portfolioService.GetAllPortfoliosAsync();
-            return View();
+            var portfolios = await _portfolioService.GetAllPortfoliosAsync();
+            return View(portfolios);
         }
-<<<<<<< HEAD
->>>>>>> anildev
-=======
 
         [HttpGet]
         public IActionResult CreatePortfolio()
         {
-            // TODO: Return create form view
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreatePortfolio(string Title, string SubTitle, string Description)
+        public async Task<IActionResult> CreatePortfolio(CreatePortfolioDto dto)
         {
-            // TODO: Service integration
-            TempData["SuccessMessage"] = "Portfolio başarıyla eklendi!";
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+
+            try
+            {
+                await _portfolioService.CreatePortfolioAsync(dto);
+                TempData["SuccessMessage"] = "Portfolio başarıyla eklendi!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+                return View(dto);
+            }
         }
 
         [HttpGet]
-        public IActionResult UpdatePortfolio(int id)
+        public async Task<IActionResult> UpdatePortfolio(int id)
         {
-            // TODO: Fetch portfolio by id and return edit form
-            return View();
+            var portfolio = await _portfolioService.GetPortfolioByIdAsync(id);
+            if (portfolio == null)
+            {
+                TempData["ErrorMessage"] = "Portfolio bulunamadı!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var updateDto = new UpdatePortfolioDto
+            {
+                Title = portfolio.Title,
+                SubTitle = portfolio.SubTitle,
+                ImageUrl = portfolio.ImageUrl,
+                Url = portfolio.Url,
+                Description = portfolio.Description
+            };
+
+            ViewBag.Id = id;
+            return View(updateDto);
         }
 
         [HttpPost]
-        public IActionResult UpdatePortfolio(int id, string Title, string SubTitle, string Description)
+        public async Task<IActionResult> UpdatePortfolio(int id, UpdatePortfolioDto dto)
         {
-            // TODO: Service integration
-            TempData["SuccessMessage"] = "Portfolio başarıyla güncellendi!";
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Id = id;
+                return View(dto);
+            }
+
+            try
+            {
+                await _portfolioService.UpdatePortfolioAsync(id, dto);
+                TempData["SuccessMessage"] = "Portfolio başarıyla güncellendi!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (KeyNotFoundException)
+            {
+                TempData["ErrorMessage"] = "Portfolio bulunamadı!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+                ViewBag.Id = id;
+                return View(dto);
+            }
         }
 
         [HttpGet]
-        public IActionResult DeletePortfolio(int id)
+        public async Task<IActionResult> DeletePortfolio(int id)
         {
-            // TODO: Delete portfolio and redirect to Index
-            TempData["SuccessMessage"] = "Portfolio deleted successfully!";
+            try
+            {
+                await _portfolioService.DeletePortfolioAsync(id);
+                TempData["SuccessMessage"] = "Portfolio başarıyla silindi!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+            }
+
             return RedirectToAction(nameof(Index));
         }
->>>>>>> anildev
     }
 }
