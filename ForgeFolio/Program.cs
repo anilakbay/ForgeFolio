@@ -57,6 +57,8 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 
 builder.Services.AddScoped<IToDoListService, ToDoListService>();
 builder.Services.AddScoped<IStatisticService, StatisticService>();
+builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 
 var app = builder.Build();
 
