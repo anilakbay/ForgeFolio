@@ -38,15 +38,22 @@
 </table>
 =======
 @{
-    ViewData["Title"] = "Referanslar Yönetimi";
+    ViewData["Title"] = "Testimonial Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "💬";
 }
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">@ViewData["Title"]</h1>
+                <h1 class="m-0">Müşteri Yorumları</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Testimonials</li>
+                </ol>
             </div>
         </div>
     </div>
@@ -54,13 +61,111 @@
 
 <section class="content">
     <div class="container-fluid">
+        @await Html.PartialAsync("_TempDataMessages")
+        
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Müşteri Referansları</h3>
+            <div class="card-header" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;">
+                <h3 class="card-title">Testimonial Listesi</h3>
+                <div class="card-tools">
+                    <a asp-action="CreateTestimonial" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus"></i> Yeni Ekle
+                    </a>
+                </div>
             </div>
             <div class="card-body">
-                <p>Referanslar yönetim sayfası yakında eklenecek.</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-primary"></i>
+                                </div>
+                                <h5 class="text-center">John Doe</h5>
+                                <p class="text-muted text-center">CEO, Tech Company</p>
+                                <p class="text-center">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </p>
+                                <p>"Harika bir profesyonel! Projemizi zamanında ve beklentilerin üzerinde teslim etti."</p>
+                                <div class="text-center">
+                                    <a asp-action="UpdateTestimonial" asp-route-id="1" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i> Düzenle
+                                    </a>
+                                    <a asp-action="DeleteTestimonial" asp-route-id="1" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
+                                        <i class="fas fa-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-success"></i>
+                                </div>
+                                <h5 class="text-center">Jane Smith</h5>
+                                <p class="text-muted text-center">CTO, StartUp Inc</p>
+                                <p class="text-center">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="far fa-star text-warning"></i>
+                                </p>
+                                <p>"Teknik bilgisi ve problem çözme yetenekleri mükemmel. Kesinlikle tavsiye ederim!"</p>
+                                <div class="text-center">
+                                    <a asp-action="UpdateTestimonial" asp-route-id="2" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i> Düzenle
+                                    </a>
+                                    <a asp-action="DeleteTestimonial" asp-route-id="2" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
+                                        <i class="fas fa-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-warning"></i>
+                                </div>
+                                <h5 class="text-center">Mike Johnson</h5>
+                                <p class="text-muted text-center">Product Manager, Digital Solutions</p>
+                                <p class="text-center">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </p>
+                                <p>"Birlikte çalışmak çok keyifliydi. İletişimi güçlü, sonuç odaklı çalışıyor."</p>
+                                <div class="text-center">
+                                    <a asp-action="UpdateTestimonial" asp-route-id="3" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i> Düzenle
+                                    </a>
+                                    <a asp-action="DeleteTestimonial" asp-route-id="3" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
+                                        <i class="fas fa-trash"></i> Sil
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="alert alert-secondary">
+            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Sample data gösteriliyor. Servis entegrasyonu için controller'daki TODO'ları inceleyin.
         </div>
     </div>
 </section>

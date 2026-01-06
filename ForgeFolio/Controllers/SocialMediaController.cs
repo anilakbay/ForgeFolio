@@ -86,10 +86,50 @@ public class SocialMediaController : Controller
 // [Authorize(Roles = "Admin")] // Temporarily disabled
 public class SocialMediaController : Controller
 {
-    // Simple Index action - no service needed yet
     public IActionResult Index()
     {
+        // TODO: Fetch real data
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult CreateSocialMedia()
+    {
+        return View();
+    }
+<<<<<<< HEAD
+>>>>>>> anildev
+=======
+
+    [HttpPost]
+    public IActionResult CreateSocialMedia(string Title, string Url, string Icon)
+    {
+        // TODO: Service integration
+        TempData["SuccessMessage"] = "Sosyal medya hesabı başarıyla eklendi!";
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult UpdateSocialMedia(int id)
+    {
+        // TODO: Fetch by id
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult UpdateSocialMedia(int id, string Title, string Url, string Icon)
+    {
+        // TODO: Service integration
+        TempData["SuccessMessage"] = "Sosyal medya hesabı başarıyla güncellendi!";
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult DeleteSocialMedia(int id)
+    {
+        // TODO: Service integration
+        TempData["SuccessMessage"] = "Sosyal medya hesabı silindi!";
+        return RedirectToAction(nameof(Index));
     }
 >>>>>>> anildev
 }
