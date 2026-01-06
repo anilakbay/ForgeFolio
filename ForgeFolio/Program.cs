@@ -17,9 +17,6 @@ builder.Host.UseSerilog((context, configuration) =>
 
 builder.Services.AddControllersWithViews();
 
-// Caching
-builder.Services.AddMemoryCache();
-
 // Database Context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -60,11 +57,8 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 
 builder.Services.AddScoped<IToDoListService, ToDoListService>();
 builder.Services.AddScoped<IStatisticService, StatisticService>();
-builder.Services.AddScoped<IFeatureService, FeatureService>();
-builder.Services.AddScoped<IAboutService, AboutService>();
-builder.Services.AddScoped<ISkillService, SkillService>();
-builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 builder.Services.AddScoped<ITestimonialService, TestimonialService>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 
 var app = builder.Build();
 
@@ -98,23 +92,6 @@ using (var scope = app.Services.CreateScope())
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred while seeding the database.");
-        
-        // Detailed error logging for debugging
-        Console.WriteLine($"Seeding Error: {ex.Message}");
-        if (ex is AggregateException ae)
-        {
-            foreach (var inner in ae.InnerExceptions)
-            {
-                Console.WriteLine($"Inner Exception: {inner.Message}");
-                Console.WriteLine($"Stack Trace: {inner.StackTrace}");
-            }
-        }
-        else if (ex.InnerException != null)
-        {
-            Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-            Console.WriteLine($"Stack Trace: {ex.InnerException.StackTrace}");
-        }
-        throw; // Re-throw to ensure we see the crash
     }
 }
 

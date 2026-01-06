@@ -12,64 +12,72 @@ public class TestimonialService : ITestimonialService
 
     public TestimonialService(IRepository<Testimonial> repository, IUnitOfWork unitOfWork)
     {
-        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IEnumerable<TestimonialDto>> GetAllTestimonialsAsync()
     {
-        var items = await _repository.GetAllAsync();
-        return items.Select(x => new TestimonialDto
+        var testimonials = await _repository.GetAllAsync();
+        return testimonials.Select(t => new TestimonialDto
         {
-            Id = x.Id,
-            ClientName = x.ClientName,
-            Comment = x.Comment,
-            CompanyName = x.CompanyName,
-            ImageUrl = x.ImageUrl
+            Id = t.Id,
+            ClientName = t.ClientName,
+            CompanyName = t.CompanyName,
+            Comment = t.Comment,
+            ImageUrl = t.ImageUrl
         });
     }
 
     public async Task<TestimonialDto?> GetTestimonialByIdAsync(int id)
     {
-        var x = await _repository.GetByIdAsync(id);
-        if (x == null) return null;
+        var testimonial = await _repository.GetByIdAsync(id);
+        if (testimonial == null) return null;
 
         return new TestimonialDto
         {
-            Id = x.Id,
-            ClientName = x.ClientName,
-            Comment = x.Comment,
-            CompanyName = x.CompanyName,
-            ImageUrl = x.ImageUrl
+            Id = testimonial.Id,
+            ClientName = testimonial.ClientName,
+            CompanyName = testimonial.CompanyName,
+            Comment = testimonial.Comment,
+            ImageUrl = testimonial.ImageUrl
         };
     }
 
-    public async Task CreateTestimonialAsync(CreateTestimonialDto dto)
+    public async Task<TestimonialDto> CreateTestimonialAsync(CreateTestimonialDto dto)
     {
-        var item = new Testimonial
+        var testimonial = new Testimonial
         {
             ClientName = dto.ClientName,
-            Comment = dto.Comment,
             CompanyName = dto.CompanyName,
+            Comment = dto.Comment,
             ImageUrl = dto.ImageUrl
         };
 
-        await _repository.AddAsync(item);
+        await _repository.AddAsync(testimonial);
         await _unitOfWork.SaveChangesAsync();
+
+        return new TestimonialDto
+        {
+            Id = testimonial.Id,
+            ClientName = testimonial.ClientName,
+            CompanyName = testimonial.CompanyName,
+            Comment = testimonial.Comment,
+            ImageUrl = testimonial.ImageUrl
+        };
     }
 
     public async Task UpdateTestimonialAsync(int id, UpdateTestimonialDto dto)
     {
-        var item = await _repository.GetByIdAsync(id);
-        if (item == null)
-            throw new Exception($"Testimonial with ID {id} not found");
+        var testimonial = await _repository.GetByIdAsync(id);
+        if (testimonial == null) throw new KeyNotFoundException($"Testimonial with ID {id} not found");
 
-        item.ClientName = dto.ClientName;
-        item.Comment = dto.Comment;
-        item.CompanyName = dto.CompanyName;
-        item.ImageUrl = dto.ImageUrl;
+        testimonial.ClientName = dto.ClientName;
+        testimonial.CompanyName = dto.CompanyName;
+        testimonial.Comment = dto.Comment;
+        testimonial.ImageUrl = dto.ImageUrl;
 
-        await _repository.UpdateAsync(item);
+        await _repository.UpdateAsync(testimonial);
         await _unitOfWork.SaveChangesAsync();
     }
 

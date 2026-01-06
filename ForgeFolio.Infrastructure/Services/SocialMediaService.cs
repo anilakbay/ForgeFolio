@@ -12,60 +12,67 @@ public class SocialMediaService : ISocialMediaService
 
     public SocialMediaService(IRepository<SocialMedia> repository, IUnitOfWork unitOfWork)
     {
-        _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<SocialMediaDto>> GetAllSocialMediasAsync()
+    public async Task<IEnumerable<SocialMediaDto>> GetAllSocialMediaAsync()
     {
-        var items = await _repository.GetAllAsync();
-        return items.Select(x => new SocialMediaDto
+        var socialMedias = await _repository.GetAllAsync();
+        return socialMedias.Select(sm => new SocialMediaDto
         {
-            Id = x.Id,
-            Title = x.Title,
-            Url = x.Url,
-            Icon = x.Icon
+            Id = sm.Id,
+            Title = sm.Title,
+            Url = sm.Url,
+            Icon = sm.Icon
         });
     }
 
     public async Task<SocialMediaDto?> GetSocialMediaByIdAsync(int id)
     {
-        var x = await _repository.GetByIdAsync(id);
-        if (x == null) return null;
+        var socialMedia = await _repository.GetByIdAsync(id);
+        if (socialMedia == null) return null;
 
         return new SocialMediaDto
         {
-            Id = x.Id,
-            Title = x.Title,
-            Url = x.Url,
-            Icon = x.Icon
+            Id = socialMedia.Id,
+            Title = socialMedia.Title,
+            Url = socialMedia.Url,
+            Icon = socialMedia.Icon
         };
     }
 
-    public async Task CreateSocialMediaAsync(CreateSocialMediaDto dto)
+    public async Task<SocialMediaDto> CreateSocialMediaAsync(CreateSocialMediaDto dto)
     {
-        var item = new SocialMedia
+        var socialMedia = new SocialMedia
         {
             Title = dto.Title,
             Url = dto.Url,
             Icon = dto.Icon
         };
 
-        await _repository.AddAsync(item);
+        await _repository.AddAsync(socialMedia);
         await _unitOfWork.SaveChangesAsync();
+
+        return new SocialMediaDto
+        {
+            Id = socialMedia.Id,
+            Title = socialMedia.Title,
+            Url = socialMedia.Url,
+            Icon = socialMedia.Icon
+        };
     }
 
     public async Task UpdateSocialMediaAsync(int id, UpdateSocialMediaDto dto)
     {
-        var item = await _repository.GetByIdAsync(id);
-        if (item == null)
-            throw new Exception($"SocialMedia with ID {id} not found");
+        var socialMedia = await _repository.GetByIdAsync(id);
+        if (socialMedia == null) throw new KeyNotFoundException($"SocialMedia with ID {id} not found");
 
-        item.Title = dto.Title;
-        item.Url = dto.Url;
-        item.Icon = dto.Icon;
+        socialMedia.Title = dto.Title;
+        socialMedia.Url = dto.Url;
+        socialMedia.Icon = dto.Icon;
 
-        await _repository.UpdateAsync(item);
+        await _repository.UpdateAsync(socialMedia);
         await _unitOfWork.SaveChangesAsync();
     }
 

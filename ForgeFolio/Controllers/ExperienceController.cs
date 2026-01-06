@@ -19,10 +19,10 @@ public class ExperienceController : Controller
     }
 
     // [Authorize(Roles = "Admin")] // Temporarily disabled for testing
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        // TODO: Fetch real data - var experiences = await _experienceService.GetAllExperiencesAsync();
-        return View();
+        var experiences = await _experienceService.GetAllExperiencesAsync();
+        return View(experiences);
     }
 
     [HttpGet]

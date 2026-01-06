@@ -6,7 +6,7 @@ public interface ITestimonialService
 {
     Task<IEnumerable<TestimonialDto>> GetAllTestimonialsAsync();
     Task<TestimonialDto?> GetTestimonialByIdAsync(int id);
-    Task CreateTestimonialAsync(CreateTestimonialDto dto);
+    Task<TestimonialDto> CreateTestimonialAsync(CreateTestimonialDto dto);
     Task UpdateTestimonialAsync(int id, UpdateTestimonialDto dto);
     Task DeleteTestimonialAsync(int id);
 }
