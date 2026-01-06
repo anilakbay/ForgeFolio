@@ -19,5 +19,13 @@ namespace ForgeFolio.Controllers
             // TODO: Fetch real data - var about = await _aboutService.GetAboutAsync();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult UpdateAbout(string Title, string SubDescription, string Details)
+        {
+            // TODO: Service integration - await _aboutService.UpdateAboutAsync(dto);
+            TempData["SuccessMessage"] = "About bilgileri başarıyla güncellendi!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
