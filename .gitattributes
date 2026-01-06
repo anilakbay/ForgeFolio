@@ -1,9 +1,8 @@
 # Mark the wwwroot folder as vendored (generated code/libraries)
-# This tells GitHub to ignore these files for language statistics
-wwwroot/** linguist-vendored
-*.min.css linguist-vendored
-*.min.js linguist-vendored
+# This uses the correct relative path from repo root
+ForgeFolio/wwwroot/** linguist-vendored
 
 # Ensure C# files are detected correctly
 *.cs linguist-detectable
 *.cshtml linguist-detectable
+
