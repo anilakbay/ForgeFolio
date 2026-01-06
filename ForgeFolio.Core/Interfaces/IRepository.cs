@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace ForgeFolio.Core.Interfaces;
 
 /// <summary>
@@ -12,5 +14,5 @@ public interface IRepository<T> where T : class
     Task UpdateAsync(T entity);
     Task DeleteAsync(int id);
     Task<bool> ExistsAsync(int id);
-    Task<int> CountAsync();
+    Task<int> CountAsync(Expression<Func<T, bool>>? filter = null);
 }

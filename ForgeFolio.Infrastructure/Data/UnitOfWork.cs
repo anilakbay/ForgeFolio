@@ -2,6 +2,9 @@ using ForgeFolio.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
+using ForgeFolio.Infrastructure.Data.Repositories;
+using ForgeFolio.Infrastructure.Data.Context;
+
 namespace ForgeFolio.Infrastructure.Data;
 
 /// <summary>
@@ -9,12 +12,17 @@ namespace ForgeFolio.Infrastructure.Data;
 /// </summary>
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly DbContext _context;
+    private readonly ApplicationDbContext _context;
     private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(DbContext context)
+    public UnitOfWork(ApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    public IRepository<T> GetRepository<T>() where T : class
+    {
+        return new GenericRepository<T>(_context);
     }
 
     public async Task<int> SaveChangesAsync()

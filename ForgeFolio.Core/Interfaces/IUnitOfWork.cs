@@ -9,4 +9,5 @@ public interface IUnitOfWork : IDisposable
     Task BeginTransactionAsync();
     Task CommitTransactionAsync();
     Task RollbackTransactionAsync();
+    IRepository<T> GetRepository<T>() where T : class;
 }

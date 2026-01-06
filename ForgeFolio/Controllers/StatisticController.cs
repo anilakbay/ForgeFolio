@@ -1,13 +1,28 @@
-﻿/*
-// Temporary comment out for refactoring
-using ForgeFolio.DAL.Context;
+﻿using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForgeFolio.Controllers
+namespace ForgeFolio.Controllers;
+
+public class StatisticController : Controller
 {
-    public class StatisticController : Controller
+    private readonly IStatisticService _statisticService;
+
+    public StatisticController(IStatisticService statisticService)
     {
-       // Refactoring needed
+        _statisticService = statisticService;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var statistics = await _statisticService.GetStatisticsAsync();
+        
+        // Retaining ViewBag for backward compatibility with View implementation if preferred, 
+        // but ideally View should use Model.
+        ViewBag.TotalSkills = statistics.TotalSkills;
+        ViewBag.TotalMessages = statistics.TotalMessages;
+        ViewBag.UnreadMessages = statistics.UnreadMessages;
+        ViewBag.ReadMessages = statistics.ReadMessages;
+
+        return View(statistics);
     }
 }
-*/

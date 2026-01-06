@@ -5,8 +5,13 @@ using ForgeFolio.Infrastructure.Data.Context;
 using ForgeFolio.Infrastructure.Data.Repositories;
 using ForgeFolio.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog Configuration
+builder.Host.UseSerilog((context, configuration) => 
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddControllersWithViews();
 
@@ -21,13 +26,21 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Business Services
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 builder.Services.AddScoped<IExperienceService, ExperienceService>();
-builder.Services.AddScoped<IMessageService, MessageService>();
+
+builder.Services.AddScoped<IToDoListService, ToDoListService>();
+builder.Services.AddScoped<IStatisticService, StatisticService>();
 
 var app = builder.Build();
 
+// if (!app.Environment.IsDevelopment())
+// {
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseHsts();
+// }
+app.UseMiddleware<ForgeFolio.Middleware.GlobalExceptionMiddleware>();
+
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 

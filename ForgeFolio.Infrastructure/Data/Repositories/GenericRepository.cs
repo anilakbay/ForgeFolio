@@ -61,8 +61,13 @@ public class GenericRepository<T> : IRepository<T> where T : class
         return entity != null;
     }
 
-    public virtual async Task<int> CountAsync()
+    public virtual async Task<int> CountAsync(System.Linq.Expressions.Expression<Func<T, bool>>? filter = null)
     {
-        return await _dbSet.CountAsync();
+        IQueryable<T> query = _dbSet;
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+        return await query.CountAsync();
     }
 }
