@@ -1,5 +1,6 @@
 ﻿using ForgeFolio.Core.DTOs.Experience;
 using ForgeFolio.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.Controllers;
@@ -7,6 +8,7 @@ namespace ForgeFolio.Controllers;
 /// <summary>
 /// Experience management controller
 /// </summary>
+[Authorize(Roles = "Admin")]
 public class ExperienceController : Controller
 {
     private readonly IExperienceService _experienceService;

@@ -1,5 +1,6 @@
 ﻿using ForgeFolio.Core.DTOs.Message;
 using ForgeFolio.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.Controllers;
@@ -7,6 +8,7 @@ namespace ForgeFolio.Controllers;
 /// <summary>
 /// Message management controller
 /// </summary>
+[Authorize(Roles = "Admin")]
 public class MessageController : Controller
 {
     private readonly IMessageService _messageService;

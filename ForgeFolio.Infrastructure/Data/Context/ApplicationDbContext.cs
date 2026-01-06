@@ -1,4 +1,6 @@
 using ForgeFolio.Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForgeFolio.Infrastructure.Data.Context;
@@ -6,7 +8,7 @@ namespace ForgeFolio.Infrastructure.Data.Context;
 /// <summary>
 /// Application database context
 /// </summary>
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

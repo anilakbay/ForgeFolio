@@ -1,9 +1,11 @@
 ﻿using ForgeFolio.Core.DTOs.ToDoList;
 using ForgeFolio.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ToDoListController : Controller
     {
         private readonly IToDoListService _toDoListService;
