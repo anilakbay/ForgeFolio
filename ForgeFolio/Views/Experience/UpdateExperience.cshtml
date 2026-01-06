@@ -1,4 +1,4 @@
-﻿@model Experience
+﻿@model ForgeFolio.Core.DTOs.Experience.UpdateExperienceDto
 
 @{
     ViewData["Title"] = "UpdateExperience";
@@ -17,7 +17,7 @@
 					<div class="card-body">
 
 						<form method="post">
-							<input type="hidden" asp-for="ExperienceId" />
+							
 							<label>Company Information</label>
 							<input type="text" class="form-control" asp-for="Head" />
 							<br />

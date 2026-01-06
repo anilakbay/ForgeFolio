@@ -1,13 +1,13 @@
-﻿using ForgeFolio.DAL.Context;
+﻿using ForgeFolio.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.ViewComponents.LayoutViewComponents
 {
     public class _LayoutNavbarComponentPartial: ViewComponent
     {
-        private readonly MyPortfolioContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public _LayoutNavbarComponentPartial(MyPortfolioContext context)
+        public _LayoutNavbarComponentPartial(ApplicationDbContext context)
         {
             _context = context;
         }

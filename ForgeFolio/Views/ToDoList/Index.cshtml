@@ -1,4 +1,4 @@
-﻿@model List<ToDoList>
+﻿@model IEnumerable<ForgeFolio.Core.Entities.ToDoList>
 
 @{
 	ViewData["Title"] = "Index";
@@ -76,14 +76,14 @@
 											<td class="text-center">
 												@if (item.Status == true)
 												{
-													<a href="/ToDoList/MarkAsPending/@item.ToDoListID" class="btn btn-success btn-sm">
+													<a href="/ToDoList/MarkAsPending/@item.Id" class="btn btn-success btn-sm">
 														<i class="fas fa-undo me-1"></i>
 														Completed
 													</a>
 												}
 												else
 												{
-													<a href="/ToDoList/MarkAsCompleted/@item.ToDoListID" class="btn btn-warning btn-sm">
+													<a href="/ToDoList/MarkAsCompleted/@item.Id" class="btn btn-warning btn-sm">
 														<i class="fas fa-check me-1"></i>
 														Mark as done
 													</a>
@@ -91,10 +91,10 @@
 											</td>
 											<td class="text-center">
 												<div class="btn-group" role="group">
-													<a href="/ToDoList/Edit/@item.ToDoListID" class="btn btn-outline-primary btn-sm">
+													<a href="/ToDoList/Edit/@item.Id" class="btn btn-outline-primary btn-sm">
 														<i class="fas fa-edit"></i>
 													</a>
-													<a href="/ToDoList/Delete/@item.ToDoListID" class="btn btn-outline-danger btn-sm">
+													<a href="/ToDoList/Delete/@item.Id" class="btn btn-outline-danger btn-sm">
 														<i class="fas fa-trash"></i>
 													</a>
 												</div>

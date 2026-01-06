@@ -1,4 +1,4 @@
-﻿@model List<ForgeFolio.DAL.Entities.Message>
+﻿@model List<ForgeFolio.Core.Entities.Message>
 
 <div class="main-header">
     <div class="logo-header">
@@ -55,7 +55,7 @@
                                 {
                                     @foreach(var item in Model.Take(3))
                                     {
-                                        <a href="/Message/Details/@item.MessageId">
+                                        <a href="/Message/Details/@item.Id">
                                             <div class="notif-icon notif-success"> 
                                                 <i class="fas fa-envelope"></i> 
                                             </div>

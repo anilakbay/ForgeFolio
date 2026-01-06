@@ -1,13 +1,13 @@
-﻿using ForgeFolio.DAL.Context;
+﻿using ForgeFolio.Infrastructure.Data.Context;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForgeFolio.ViewComponents
 {
     public class _SkillComponentPartial: ViewComponent
     {
-        private readonly MyPortfolioContext _portfolioContext;
+        private readonly ApplicationDbContext _portfolioContext;
         
-        public _SkillComponentPartial(MyPortfolioContext portfolioContext)
+        public _SkillComponentPartial(ApplicationDbContext portfolioContext)
         {
             _portfolioContext = portfolioContext;
         }

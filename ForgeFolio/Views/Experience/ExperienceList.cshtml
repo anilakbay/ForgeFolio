@@ -1,4 +1,4 @@
-﻿@model List<Experience>
+﻿@model IEnumerable<ForgeFolio.Core.DTOs.Experience.ExperienceDto>
 
 @{
 	ViewData["Title"] = "ExperienceList";
@@ -34,12 +34,12 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td>@item.ExperienceId</td>
+										<td>@item.Id</td>
 										<td>@item.Head</td>
 										<td>@item.Title</td>
 										<td>@item.Date</td>
-										<td><a href="/Experience/DeleteExperience/@item.ExperienceId" class="btn btn-danger">Delete</a></td>
-										<td><a href="/Experience/UpdateExperience/@item.ExperienceId" class="btn btn-success">Update</a></td>
+										<td><a href="/Experience/DeleteExperience/@item.Id" class="btn btn-danger">Delete</a></td>
+										<td><a href="/Experience/UpdateExperience/@item.Id" class="btn btn-success">Update</a></td>
 									</tr>
 								}
 							</tbody>

@@ -1,4 +1,4 @@
-﻿@model ToDoList
+﻿@model ForgeFolio.Core.Entities.ToDoList
 
 @{
     ViewData["Title"] = "UpdateToDoList";
@@ -17,7 +17,7 @@
 					<div class="card-body">
 
 						<form method="post">
-                            <input type="hidden" asp-for="ToDoListID" />
+                            <input type="hidden" asp-for="Id" />
 							<label>Title & Content</label>
 							<input type="text" class="form-control" asp-for="Title" />
 							<br />
