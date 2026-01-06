@@ -1,9 +1,91 @@
+@model IEnumerable<ForgeFolio.Core.DTOs.Portfolio.PortfolioDto>
+
 @{
     ViewData["Title"] = "Portfolio Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["BodyClass"] = "page-portfolio";
     ViewData["PageIcon"] = "💼";
 }
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Portfolio Yönetimi</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Portfolio</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        @await Html.PartialAsync("_TempDataMessages")
+        
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Portfolio Listesi</h3>
+                <div class="card-tools">
+                    <a asp-action="CreatePortfolio" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Yeni Ekle
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Başlık</th>
+                                <th>Alt Başlık</th>
+                                <th>Tarih</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.SubTitle</td>
+                                    <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
+                                    <td>
+                                        <a asp-action="UpdatePortfolio" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="DeletePortfolio" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Bu portfolyoyu silmek istediğinize emin misiniz?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Henüz portfolio yok. "Yeni Ekle" butonuna tıklayarak başlayın!
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="alert alert-secondary">
+            <i class="fas fa-database"></i> <strong>Not:</strong> Portfolio listesi veritabanından dinamik olarak yüklenmektedir.
+        </div>
+    </div>
+</section>
+
 
 <div class="content-header">
     <div class="container-fluid">
