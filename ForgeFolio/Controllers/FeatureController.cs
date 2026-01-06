@@ -19,5 +19,27 @@ namespace ForgeFolio.Controllers
             // TODO: Fetch real data - var features = await _featureService.GetAllFeaturesAsync();
             return View();
         }
+
+        [HttpGet]
+        public IActionResult CreateFeature()
+        {
+            // TODO: Return create form view
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateFeature(int id)
+        {
+            // TODO: Fetch feature by id and return edit form
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult DeleteFeature(int id)
+        {
+            // TODO: Delete feature and redirect to Index
+            TempData["SuccessMessage"] = "Feature deleted successfully!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

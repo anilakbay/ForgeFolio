@@ -19,5 +19,27 @@ namespace ForgeFolio.Controllers
             // TODO: Fetch real data - var portfolios = await _portfolioService.GetAllPortfoliosAsync();
             return View();
         }
+
+        [HttpGet]
+        public IActionResult CreatePortfolio()
+        {
+            // TODO: Return create form view
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdatePortfolio(int id)
+        {
+            // TODO: Fetch portfolio by id and return edit form
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult DeletePortfolio(int id)
+        {
+            // TODO: Delete portfolio and redirect to Index
+            TempData["SuccessMessage"] = "Portfolio deleted successfully!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
