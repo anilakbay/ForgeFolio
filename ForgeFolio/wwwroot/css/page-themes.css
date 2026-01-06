@@ -1,0 +1,95 @@
+/* ========================================
+   PAGE-SPECIFIC COLOR THEMES
+   ======================================== */
+
+/* === PORTFOLIO PAGE - BLUE === */
+body.page-portfolio .content-header h1,
+body.page-portfolio .card-header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white !important;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+body.page-portfolio .content-wrapper {
+    background: linear-gradient(180deg, #e3f2fd 0%, #f8f9fc 40%);
+}
+
+body.page-portfolio .btn-success {
+    background: #4e73df;
+    border-color: #4e73df;
+}
+
+/* === FEATURES PAGE - ORANGE === */
+body.page-features .content-header h1,
+body.page-features .card-header {
+    background: linear-gradient(135deg, #ff6f3c 0%, #ff4e00 100%);
+    color: white !important;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+body.page-features .content-wrapper {
+    background: linear-gradient(180deg, #fff3e0 0%, #f8f9fc 40%);
+}
+
+body.page-features .btn-success {
+    background: #ff6f3c;
+    border-color: #ff6f3c;
+}
+
+/* === ABOUT PAGE - PURPLE === */
+body.page-about .content-header h1,
+body.page-about .card-header {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+    color: white !important;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+body.page-about .content-wrapper {
+    background: linear-gradient(180deg, #f3e5f5 0%, #f8f9fc 40%);
+}
+
+body.page-about .card-primary .card-header {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
+}
+
+body.page-about .btn-primary {
+    background: #9b59b6;
+    border-color: #9b59b6;
+}
+
+/* === SKILLS PAGE - GREEN === */
+body.page-skills .content-header h1,
+body.page-skills .card-header {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white !important;
+    padding: 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+body.page-skills .content-wrapper {
+    background: linear-gradient(180deg, #d1fae5 0%, #f8f9fc 40%);
+}
+
+body.page-skills .btn-success {
+    background: #10b981;
+    border-color: #10b981;
+}
+
+/* === COMMON STYLING FOR ALL THEMED PAGES === */
+body[class*="page-"] .content-header h1 {
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[class*="page-"] .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    border: none;
+}
+
+body[class*="page-"] .card-header {
+    border: none;
+    font-weight: 600;
+}

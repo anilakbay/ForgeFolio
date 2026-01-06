@@ -5,31 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewData["Title"] - ForgeFolio Admin</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    @if(ViewData["PageIcon"] != null)
+    {
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>@ViewData["PageIcon"]</text></svg>">
+    }
+    else
+    {
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    }
+
+    <!-- Google Font: Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AdminLTE -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Custom Lux Modern Theme -->
+    <link rel="stylesheet" href="~/css/admin-theme-custom.css">
+    <!-- Page-Specific Themes -->
+    <link rel="stylesheet" href="~/css/page-themes.css">
     <!-- Chart.js -->
-    <style>
-        .brand-link {
-            border-bottom: 1px solid #4b545c;
-        }
-        .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
-            background-color: rgba(255,255,255,.1);
-            color: #fff;
-        }
-        .small-box {
-            border-radius: 0.5rem;
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
-    </style>
+
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-light-primary @ViewData["BodyClass"]">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -91,7 +89,7 @@
         </nav>
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-light-primary elevation-2">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
                 <i class="fas fa-chart-line brand-image ml-3" style="opacity: .8; font-size: 2rem;"></i>

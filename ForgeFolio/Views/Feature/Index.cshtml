@@ -40,6 +40,8 @@
 @{
     ViewData["Title"] = "Özellikler";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["BodyClass"] = "page-features";
+    ViewData["PageIcon"] = "⭐";
 }
 
 <div class="content-header">
@@ -64,7 +66,7 @@
             <div class="card-header">
                 <h3 class="card-title">Özellik Listesi</h3>
                 <div class="card-tools">
-                    <a href="#" class="btn btn-success btn-sm">
+                    <a asp-action="CreateFeature" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i> Yeni Ekle
                     </a>
                 </div>
@@ -85,8 +87,13 @@
                             <td>Responsive Tasarım</td>
                             <td><i class="fas fa-mobile-alt"></i></td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                <a asp-action="UpdateFeature" asp-route-id="1" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="DeleteFeature" asp-route-id="1" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu feature öğesini silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -94,8 +101,13 @@
                             <td>Modern UI/UX</td>
                             <td><i class="fas fa-paint-brush"></i></td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                <a asp-action="UpdateFeature" asp-route-id="2" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="DeleteFeature" asp-route-id="2" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu feature öğesini silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

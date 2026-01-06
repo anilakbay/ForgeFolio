@@ -95,6 +95,31 @@ namespace ForgeFolio.Controllers
             // TODO: Fetch real data - var skills = await _skillService.GetAllSkillsAsync();
             return View();
         }
+<<<<<<< HEAD
+>>>>>>> anildev
+=======
+
+        [HttpGet]
+        public IActionResult CreateSkill()
+        {
+            // TODO: Return create form view
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateSkill(int id)
+        {
+            // TODO: Fetch skill by id and return edit form
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult DeleteSkill(int id)
+        {
+            // TODO: Delete skill and redirect to Index
+            TempData["SuccessMessage"] = "Skill deleted successfully!";
+            return RedirectToAction(nameof(Index));
+        }
 >>>>>>> anildev
     }
 }
