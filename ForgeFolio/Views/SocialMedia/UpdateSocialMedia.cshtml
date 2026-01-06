@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Sosyal Medya Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "📱";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Sosyal Medya Düzenle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Sosyal Medya</a></li>
+                    <li class="breadcrumb-item active">Düzenle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 class="card-title">Sosyal Medya Bilgilerini Güncelle</h3>
+            </div>
+            <form method="post">
+                <div class="card-body">
+                    <input type="hidden" name="Id" value="@ViewBag.Id" />
+                    
+                    <div class="form-group">
+                        <label for="title">Platform Adı</label>
+                        <input type="text" class="form-control" id="title" name="Title" value="LinkedIn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL</label>
+                        <input type="url" class="form-control" id="url" name="Url" value="https://linkedin.com/in/anilakbay" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="icon">İkon (Font Awesome)</label>
+                        <input type="text" class="form-control" id="icon" name="Icon" value="fab fa-linkedin">
+                        <small class="form-text text-muted">
+                            <a href="https://fontawesome.com/icons?d=gallery&s=brands" target="_blank">Font Awesome Brand Icons</a>
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Önizleme:</label>
+                        <div>
+                            <i id="iconPreview" class="fab fa-linkedin" style="font-size: 3rem; color: #0077b5;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn text-white" style="background: #667eea; border-color: #667eea;">
+                        <i class="fas fa-save"></i> Güncelle
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('icon').addEventListener('input', function() {
+        const iconClass = this.value || 'fab fa-question-circle';
+        document.getElementById('iconPreview').className = iconClass;
+    });
+</script>

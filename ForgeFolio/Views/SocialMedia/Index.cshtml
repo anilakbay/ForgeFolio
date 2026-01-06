@@ -1,13 +1,20 @@
 @{
     ViewData["Title"] = "Sosyal Medya Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "📱";
 }
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">@ViewData["Title"]</h1>
+                <h1 class="m-0">Sosyal Medya Hesapları</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Sosyal Medya</li>
+                </ol>
             </div>
         </div>
     </div>
@@ -15,13 +22,81 @@
 
 <section class="content">
     <div class="container-fluid">
+        @await Html.PartialAsync("_TempDataMessages")
+        
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Sosyal Medya Hesapları</h3>
+            <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 class="card-title">Sosyal Medya Listesi</h3>
+                <div class="card-tools">
+                    <a asp-action="CreateSocialMedia" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus"></i> Yeni Ekle
+                    </a>
+                </div>
             </div>
             <div class="card-body">
-                <p>Sosyal medya yönetim sayfası yakında eklenecek.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Platform</th>
+                            <th>URL</th>
+                            <th>İkon</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>LinkedIn</td>
+                            <td>https://linkedin.com/in/anilakbay</td>
+                            <td><i class="fab fa-linkedin" style="font-size: 1.5rem; color: #0077b5;"></i></td>
+                            <td>
+                                <a asp-action="UpdateSocialMedia" asp-route-id="1" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="DeleteSocialMedia" asp-route-id="1" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>GitHub</td>
+                            <td>https://github.com/anilakbay</td>
+                            <td><i class="fab fa-github" style="font-size: 1.5rem; color: #333;"></i></td>
+                            <td>
+                                <a asp-action="UpdateSocialMedia" asp-route-id="2" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="DeleteSocialMedia" asp-route-id="2" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Twitter</td>
+                            <td>https://twitter.com/anilakbay</td>
+                            <td><i class="fab fa-twitter" style="font-size: 1.5rem; color: #1da1f2;"></i></td>
+                            <td>
+                                <a asp-action="UpdateSocialMedia" asp-route-id="3" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="DeleteSocialMedia" asp-route-id="3" class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+        <div class="alert alert-secondary">
+            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Sample data gösteriliyor. Servis entegrasyonu için controller'daki TODO'ları inceleyin.
         </div>
     </div>
 </section>
