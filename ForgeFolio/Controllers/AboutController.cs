@@ -1,63 +1,7 @@
-<<<<<<< HEAD
-using ForgeFolio.Core.DTOs.About;
-=======
->>>>>>> anildev
 using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-<<<<<<< HEAD
-namespace ForgeFolio.Controllers;
-
-[Authorize(Roles = "Admin")]
-public class AboutController : Controller
-{
-    private readonly IAboutService _aboutService;
-
-    public AboutController(IAboutService aboutService)
-    {
-        _aboutService = aboutService;
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Index()
-    {
-        var value = await _aboutService.GetAboutAsync();
-        return View(value);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Update(int id)
-    {
-        var value = await _aboutService.GetAboutAsync();
-        if (value == null || value.Id != id) // Basic validation
-        {
-             // If no about exists, maybe redirect to Create? 
-             // Start-up seeding should ensure one exists.
-             return NotFound();
-        }
-
-        var updateDto = new UpdateAboutDto
-        {
-            Id = value.Id,
-            Title = value.Title,
-            SubDescription = value.SubDescription,
-            Details = value.Details
-        };
-
-        return View(updateDto);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Update(UpdateAboutDto updateAboutDto)
-    {
-        if (ModelState.IsValid)
-        {
-            await _aboutService.UpdateAboutAsync(updateAboutDto);
-            return RedirectToAction("Index");
-        }
-        return View(updateAboutDto);
-=======
 namespace ForgeFolio.Controllers
 {
     // [Authorize(Roles = "Admin")] // Temporarily disabled
@@ -75,6 +19,13 @@ namespace ForgeFolio.Controllers
             // TODO: Fetch real data - var about = await _aboutService.GetAboutAsync();
             return View();
         }
->>>>>>> anildev
+
+        [HttpPost]
+        public IActionResult UpdateAbout(string Title, string SubDescription, string Details)
+        {
+            // TODO: Service integration - await _aboutService.UpdateAboutAsync(dto);
+            TempData["SuccessMessage"] = "About bilgileri başarıyla güncellendi!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

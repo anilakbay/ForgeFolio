@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"] = "Yeni Portfolio Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["BodyClass"] = "page-portfolio";
+    ViewData["PageIcon"] = "💼";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Portfolio Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Portfolio</a></li>
+                    <li class="breadcrumb-item active">Yeni Ekle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header" style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); color: white;">
+                <h3 class="card-title">Portfolio Bilgileri</h3>
+            </div>
+            <form method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title">Başlık</label>
+                        <input type="text" class="form-control" id="title" name="Title" placeholder="Örn: E-Ticaret Platformu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subtitle">Alt Başlık</label>
+                        <input type="text" class="form-control" id="subtitle" name="SubTitle" placeholder="Örn: Modern e-ticaret çözümü">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Açıklama</label>
+                        <textarea class="form-control" id="description" name="Description" rows="4" placeholder="Proje detayları..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Görsel URL</label>
+                        <input type="url" class="form-control" id="imageUrl" name="ImageUrl" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectUrl">Proje URL</label>
+                        <input type="url" class="form-control" id="projectUrl" name="ProjectUrl" placeholder="https://project-demo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tarih</label>
+                        <input type="date" class="form-control" id="date" name="Date" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" style="background: #4e73df; border-color: #4e73df;">
+                        <i class="fas fa-save"></i> Kaydet
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Bu form şu anda placeholder modundadır. 
+            Servis entegrasyonu için TODO yorumları controller'da bulunmaktadır.
+        </div>
+    </div>
+</section>
