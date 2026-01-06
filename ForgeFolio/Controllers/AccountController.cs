@@ -16,6 +16,12 @@ public class AccountController : Controller
         _signInManager = signInManager;
     }
 
+    // Redirect /Account/ to /Account/Login
+    public IActionResult Index()
+    {
+        return RedirectToAction("Login");
+    }
+
     [HttpGet]
     public IActionResult Register()
     {

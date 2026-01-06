@@ -16,6 +16,12 @@ public class ContactController : Controller
         _messageService = messageService;
     }
 
+    // Index action for /Contact route
+    public IActionResult Index()
+    {
+        return View();
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> SendMessage(CreateMessageDto dto)

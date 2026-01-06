@@ -1,4 +1,5 @@
 using ForgeFolio.Core.Interfaces;
+using ForgeFolio.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForgeFolio.Infrastructure.Data.Repositories;
@@ -9,10 +10,10 @@ namespace ForgeFolio.Infrastructure.Data.Repositories;
 /// <typeparam name="T">Entity type</typeparam>
 public class GenericRepository<T> : IRepository<T> where T : class
 {
-    protected readonly DbContext _context;
+    protected readonly ApplicationDbContext _context;
     protected readonly DbSet<T> _dbSet;
 
-    public GenericRepository(DbContext context)
+    public GenericRepository(ApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _dbSet = _context.Set<T>();

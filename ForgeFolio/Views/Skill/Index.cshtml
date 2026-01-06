@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Yetenekler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yetenekler</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Skills</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Yetenek Listesi</h3>
+                <div class="card-tools">
+                    <a href="#" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Yeni Ekle
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Yetenek</th>
+                            <th style="width: 200px">Seviye</th>
+                            <th style="width: 120px">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ASP.NET Core</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 90%">90%</div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>React</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" style="width: 85%">85%</div>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
