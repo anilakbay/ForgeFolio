@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Yeni Skill Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["BodyClass"] = "page-skills";
+    ViewData["PageIcon"] = "🎯";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Skill Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Skills</a></li>
+                    <li class="breadcrumb-item active">Yeni Ekle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white;">
+                <h3 class="card-title">Skill Bilgileri</h3>
+            </div>
+            <form method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title">Yetenek Adı</label>
+                        <input type="text" class="form-control" id="title" name="Title" placeholder="Örn: ASP.NET Core" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="value">Seviye (%)</label>
+                        <input type="range" class="custom-range" id="value" name="Value" min="0" max="100" value="50" oninput="document.getElementById('valueDisplay').innerText = this.value + '%'">
+                        <div class="text-center mt-2">
+                            <span id="valueDisplay" class="badge badge-success" style="font-size: 1.2rem;">50%</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Önizleme:</label>
+                        <div class="progress" style="height: 25px;">
+                            <div id="progressPreview" class="progress-bar bg-success" role="progressbar" style="width: 50%;">50%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success" style="background: #10b981; border-color: #10b981;">
+                        <i class="fas fa-save"></i> Kaydet
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> <strong>Not:</strong> Slider ile seviyeyi %0-%100 arasında ayarlayabilirsiniz.
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('value').addEventListener('input', function() {
+        const val = this.value;
+        document.getElementById('valueDisplay').innerText = val + '%';
+        const progressBar = document.getElementById('progressPreview');
+        progressBar.style.width = val + '%';
+        progressBar.innerText = val + '%';
+    });
+</script>
