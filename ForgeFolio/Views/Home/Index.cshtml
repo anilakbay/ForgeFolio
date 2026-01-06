@@ -1,8 +1,249 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "📊";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
+
+<section class="content">
+    <div class="container-fluid">
+        @await Html.PartialAsync("_TempDataMessages")
+
+        <!-- Hoş Geldin Mesajı -->
+        <div class="alert alert-info alert-dismissible fade show" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: white;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5><i class="icon fas fa-info-circle"></i> Hoş Geldiniz!</h5>
+            Admin paneline hoş geldiniz. Aşağıdaki istatistikleri ve özet bilgileri inceleyebilirsiniz.
+        </div>
+
+        <!-- İstatistik Kartları -->
+        <div class="row">
+            <!-- Portfolio Card -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box" style="background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);">
+                    <div class="inner">
+                        <h3>12</h3>
+                        <p>Portfolio Projeleri</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <a asp-controller="Portfolio" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                    <div class="inner">
+                        <h3>24</h3>
+                        <p>Yetenekler</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <a asp-controller="Skill" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Messages Card -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                    <div class="inner">
+                        <h3>8</h3>
+                        <p>Yeni Mesajlar</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <a asp-controller="Message" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Experience Card -->
+            <div class="col-lg-3 col-6">
+                <div class="small-box" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                    <div class="inner">
+                        <h3>6</h3>
+                        <p>Deneyimler</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <a asp-controller="Experience" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- İkinci Satır: Grafikler ve Son Aktiviteler -->
+        <div class="row">
+            <!-- Progress Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <h3 class="card-title">
+                            <i class="fas fa-chart-pie mr-1"></i>
+                            Yetenek Dağılımı
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="skillsChart" style="height: 250px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Son Mesajlar -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;">
+                        <h3 class="card-title">
+                            <i class="fas fa-comments mr-1"></i>
+                            Son Mesajlar
+                        </h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="products-list product-list-in-card pl-2 pr-2">
+                            <li class="item">
+                                <div class="product-info">
+                                    <span class="product-title">
+                                        John Doe
+                                        <span class="badge badge-warning float-right">Yeni</span>
+                                    </span>
+                                    <span class="product-description">
+                                        Proje hakkında bilgi almak istiyorum...
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="product-info">
+                                    <span class="product-title">
+                                        Jane Smith
+                                        <span class="badge badge-info float-right">Okundu</span>
+                                    </span>
+                                    <span class="product-description">
+                                        Harika bir portfolyo!
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="product-info">
+                                    <span class="product-title">
+                                        Mike Johnson
+                                        <span class="badge badge-success float-right">Yanıtlandı</span>
+                                    </span>
+                                    <span class="product-description">
+                                        İş teklifi için görüşmek isterim.
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-controller="Message" asp-action="Index" class="uppercase">Tüm Mesajları Gör</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Üçüncü Satır: Hızlı İşlemler -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-bolt mr-1"></i>
+                            Hızlı İşlemler
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a asp-controller="Portfolio" asp-action="CreatePortfolio" class="btn btn-block btn-primary">
+                                    <i class="fas fa-plus"></i> Yeni Portfolio
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a asp-controller="Skill" asp-action="CreateSkill" class="btn btn-block btn-success">
+                                    <i class="fas fa-plus"></i> Yeni Skill
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a asp-controller="Experience" asp-action="CreateExperience" class="btn btn-block btn-warning">
+                                    <i class="fas fa-plus"></i> Yeni Deneyim
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a asp-controller="About" asp-action="Index" class="btn btn-block btn-info">
+                                    <i class="fas fa-user"></i> About Düzenle
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Data Notice -->
+        <div class="alert alert-secondary">
+            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Gösterilen istatistikler sample data'dır. 
+            Gerçek veri entegrasyonu için controller'daki TODO yorumlarını inceleyin.
+        </div>
+    </div>
+</section>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+    // Skills Pie Chart
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Frontend', 'Backend', 'DevOps', 'Design', 'Database'],
+            datasets: [{
+                data: [30, 25, 15, 10, 20],
+                backgroundColor: [
+                    '#4e73df',
+                    '#10b981',
+                    '#f59e0b',
+                    '#8b5cf6',
+                    '#ef4444'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
