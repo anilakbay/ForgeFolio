@@ -27,11 +27,27 @@ namespace ForgeFolio.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateSkill(string Title, int Value)
+        {
+            // TODO: Service integration - await _skillService.CreateSkillAsync(dto);
+            TempData["SuccessMessage"] = "Skill başarıyla eklendi!";
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public IActionResult UpdateSkill(int id)
         {
             // TODO: Fetch skill by id and return edit form
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSkill(int id, string Title, int Value)
+        {
+            // TODO: Service integration - await _skillService.UpdateSkillAsync(id, dto);
+            TempData["SuccessMessage"] = "Skill başarıyla güncellendi!";
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

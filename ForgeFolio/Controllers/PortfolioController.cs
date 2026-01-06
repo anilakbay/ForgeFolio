@@ -27,11 +27,27 @@ namespace ForgeFolio.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreatePortfolio(string Title, string SubTitle, string Description)
+        {
+            // TODO: Service integration
+            TempData["SuccessMessage"] = "Portfolio başarıyla eklendi!";
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public IActionResult UpdatePortfolio(int id)
         {
             // TODO: Fetch portfolio by id and return edit form
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePortfolio(int id, string Title, string SubTitle, string Description)
+        {
+            // TODO: Service integration
+            TempData["SuccessMessage"] = "Portfolio başarıyla güncellendi!";
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
