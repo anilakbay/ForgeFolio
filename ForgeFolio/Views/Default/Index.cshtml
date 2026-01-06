@@ -1,288 +1,390 @@
 ﻿﻿@{
-    ViewData["Title"] = "Dashboard";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "ForgeFolio - Portfolio";
+    Layout = null; // Public page, no admin layout
 }
 
-<!-- Content Header -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                </ol>
-            </div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .btn {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hero .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image i {
+            font-size: 200px;
+            color: #667eea;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        /* Portfolio Section */
+        .portfolio-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .portfolio-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .portfolio-card .card-body {
+            padding: 25px;
+        }
+
+        .portfolio-badge {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: #f8f9fa;
+        }
+
+        .skill-item {
+            margin-bottom: 30px;
+        }
+
+        .skill-item h5 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .progress {
+            height: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            font-weight: 600;
+            line-height: 25px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-form .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #764ba2;
+        }
+
+        /* Animations */
+        @@keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>ForgeFolio</h1>
+            <p>Modern, profesyonel ve dinamik portfolio yönetim sistemi. Projelerinizi, yeteneklerinizi ve deneyimlerinizi sergileyin.</p>
+            <a href="#portfolio" class="btn btn-light">Projelerimi Gör</a>
+            <a href="#contact" class="btn btn-outline-light">İletişime Geç</a>
         </div>
     </div>
-</div>
 
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-        <!-- Info boxes -->
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-briefcase"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Portfolio</span>
-                        <span class="info-box-number">
-                            12
-                            <small>proje</small>
-                        </span>
-                    </div>
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>Hakkımda</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="about-text">
+                    <h3>Full Stack Developer</h3>
+                    <p>5+ yıl deneyimli Full Stack Developer. ASP.NET Core, React, ve modern web teknolojileri üzerine uzmanım. 
+                    Profesyonel web uygulamaları geliştiriyor, kullanıcı deneyimini ön planda tutuyorum.</p>
+                    <p><strong>Email:</strong> info@forgefolio.com</p>
+                    <p><strong>Telefon:</strong> +90 555 123 4567</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-star"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Features</span>
-                        <span class="info-box-number">8</span>
+    <!-- Portfolio Section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="container">
+            <h2>Projelerim</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card portfolio-card">
+                        <img src="https://via.placeholder.com/400x200/4e73df/ffffff?text=E-Commerce" class="card-img-top" alt="E-Commerce">
+                        <div class="card-body">
+                            <span class="portfolio-badge">Web Development</span>
+                            <h5 class="card-title">E-Ticaret Platformu</h5>
+                            <p class="card-text">Modern e-ticaret çözümü. ASP.NET Core ve React ile geliştirildi.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-envelope"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Mesajlar</span>
-                        <span class="info-box-number">24</span>
+                <div class="col-md-4">
+                    <div class="card portfolio-card">
+                        <img src="https://via.placeholder.com/400x200/10b981/ffffff?text=Mobile+App" class="card-img-top" alt="Mobile App">
+                        <div class="card-body">
+                            <span class="portfolio-badge">Mobile Development</span>
+                            <h5 class="card-title">Mobil Uygulama</h5>
+                            <p class="card-text">iOS & Android platformları için cross-platform mobil uygulama.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-tasks"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Bekleyen Görevler</span>
-                        <span class="info-box-number">5</span>
+                <div class="col-md-4">
+                    <div class="card portfolio-card">
+                        <img src="https://via.placeholder.com/400x200/f59e0b/ffffff?text=Dashboard" class="card-img-top" alt="Dashboard">
+                        <div class="card-body">
+                            <span class="portfolio-badge">UI/UX Design</span>
+                            <h5 class="card-title">Admin Dashboard</h5>
+                            <p class="card-text">Profesyonel ve kullanıcı dostu admin panel tasarımı.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Charts Row -->
-        <div class="row">
-            <!-- Pie Chart -->
-            <div class="col-md-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Portfolio Dağılımı</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="container">
+            <h2>Yeteneklerim</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h5>ASP.NET Core</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%">90%</div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <canvas id="portfolioPieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <div class="skill-item">
+                        <h5>React</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%">85%</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <h5>JavaScript</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 88%">88%</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Bar Chart -->
-            <div class="col-md-6">
-                <div class="card card-success">
-                    <div class="card-header">
-                        <h3 class="card-title">Aylık Aktivite</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+                <div class="col-md-6">
+                    <div class="skill-item">
+                        <h5>SQL Server</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 82%">82%</div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <canvas id="monthlyBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Activity & Tasks -->
-        <div class="row">
-            <!-- Recent Portfolio Items -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Son Eklenen Portfolio</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+                    <div class="skill-item">
+                        <h5>UI/UX Design</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%">75%</div>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table m-0">
-                                <thead>
-                                    <tr>
-                                        <th>Proje</th>
-                                        <th>Tarih</th>
-                                        <th>Durum</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#">E-Ticaret Platformu</a></td>
-                                        <td>05 Ocak 2026</td>
-                                        <td><span class="badge badge-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Mobil Uygulama</a></td>
-                                        <td>03 Ocak 2026</td>
-                                        <td><span class="badge badge-warning">Devam Ediyor</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Web Sitesi Tasarımı</a></td>
-                                        <td>01 Ocak 2026</td>
-                                        <td><span class="badge badge-success">Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">API Geliştirme</a></td>
-                                        <td>28 Ara 2025</td>
-                                        <td><span class="badge badge-danger">Bekliyor</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="skill-item">
+                        <h5>Git & DevOps</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 80%">80%</div>
                         </div>
-                    </div>
-                    <div class="card-footer clearfix">
-                        <a asp-controller="Portfolio" asp-action="Index" class="btn btn-sm btn-primary float-right">Tümünü Gör</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- To-Do List -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Bekleyen Görevler</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="todo-list" data-widget="todo-list">
-                            <li>
-                                <span class="handle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </span>
-                                <div class="icheck-primary d-inline ml-2">
-                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                                    <label for="todoCheck1"></label>
-                                </div>
-                                <span class="text">Portfolio sayfasını güncelle</span>
-                                <small class="badge badge-danger"><i class="far fa-clock"></i> Bugün</small>
-                            </li>
-                            <li>
-                                <span class="handle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </span>
-                                <div class="icheck-primary d-inline ml-2">
-                                    <input type="checkbox" value="" name="todo2" id="todoCheck2">
-                                    <label for="todoCheck2"></label>
-                                </div>
-                                <span class="text">Mesajlara cevap ver</span>
-                                <small class="badge badge-warning"><i class="far fa-clock"></i> Yarın</small>
-                            </li>
-                            <li>
-                                <span class="handle">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </span>
-                                <div class="icheck-primary d-inline ml-2">
-                                    <input type="checkbox" value="" name="todo3" id="todoCheck3">
-                                    <label for="todoCheck3"></label>
-                                </div>
-                                <span class="text">Yeni özellikler ekle</span>
-                                <small class="badge badge-info"><i class="far fa-clock"></i> Bu Hafta</small>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer clearfix">
-                        <a asp-controller="ToDoList" asp-action="Index" class="btn btn-sm btn-primary float-right">Tümünü Gör</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Portfolio Pie Chart
-        var pieChartCanvas = document.getElementById('portfolioPieChart').getContext('2d');
-        var pieData = {
-            labels: [
-                'Web Uygulamaları',
-                'Mobil Uygulamalar',
-                'Tasarım Projeleri',
-                'Diğer'
-            ],
-            datasets: [{
-                data: [5, 3, 2, 2],
-                backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545'],
-            }]
-        };
-        var pieOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                }
-            }
-        };
-        new Chart(pieChartCanvas, {
-            type: 'pie',
-            data: pieData,
-            options: pieOptions
-        });
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>İletişime Geçin</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form class="contact-form" asp-controller="Contact" asp-action="SendMessage" method="post">
+                        <input type="text" name="Name" class="form-control" placeholder="Adınız" required>
+                        <input type="email" name="Email" class="form-control" placeholder="E-posta" required>
+                        <input type="text" name="Subject" class="form-control" placeholder="Konu" required>
+                        <textarea name="MessageContent" class="form-control" rows="5" placeholder="Mesajınız" required></textarea>
+                        <button type="submit" class="btn btn-light">Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Monthly Bar Chart
-        var barChartCanvas = document.getElementById('monthlyBarChart').getContext('2d');
-        var barData = {
-            labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'],
-            datasets: [{
-                label: 'Tamamlanan Projeler',
-                backgroundColor: 'rgba(40, 167, 69, 0.8)',
-                borderColor: 'rgba(40, 167, 69, 1)',
-                borderWidth: 1,
-                data: [3, 5, 2, 4, 6, 3]
-            }]
-        };
-        var barOptions = {
-            maintainAspectRatio: false,
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
-            }
-        };
-        new Chart(barChartCanvas, {
-            type: 'bar',
-            data: barData,
-            options: barOptions
-        });
-    </script>
-}
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ForgeFolio. Tüm hakları saklıdır.</p>
+            <p>
+                <a href="/Account/Login"><i class="fas fa-lock"></i> Admin Panel</a> | 
+                <a href="/Home/Privacy"><i class="fas fa-shield-alt"></i> Gizlilik Politikası</a>
+            </p>
+        </div>
+    </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
