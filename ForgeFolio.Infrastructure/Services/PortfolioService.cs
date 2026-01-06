@@ -34,6 +34,25 @@ public class PortfolioService : IPortfolioService
         });
     }
 
+    public async Task<Core.Common.PaginatedList<PortfolioDto>> GetAllPortfoliosPaginatedAsync(int pageIndex, int pageSize)
+    {
+        var query = _repository.GetQueryable().Select(p => new PortfolioDto
+        {
+            Id = p.Id,
+            Title = p.Title,
+            SubTitle = p.SubTitle,
+            ImageUrl = p.ImageUrl,
+            Url = p.Url,
+            Description = p.Description,
+            CreatedAt = p.CreatedAt
+        });
+
+        // Add default ordering
+        query = query.OrderByDescending(x => x.CreatedAt);
+
+        return await Core.Common.PaginatedList<PortfolioDto>.CreateAsync(query, pageIndex, pageSize);
+    }
+
     public async Task<PortfolioDto?> GetPortfolioByIdAsync(int id)
     {
         var portfolio = await _repository.GetByIdAsync(id);

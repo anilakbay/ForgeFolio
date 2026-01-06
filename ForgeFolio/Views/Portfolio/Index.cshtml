@@ -1,0 +1,53 @@
+@model ForgeFolio.Core.Common.PaginatedList<ForgeFolio.Core.DTOs.Portfolio.PortfolioDto>
+@{
+    ViewData["Title"] = "Portfolios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Portfolios</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>SubTitle</th>
+            <th>URL</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.SubTitle</td>
+                <td><a href="@item.Url" target="_blank">Link</a></td>
+                <td>
+                    <a href="/Portfolio/Update/@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Portfolio/Delete/@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-page="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

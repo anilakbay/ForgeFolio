@@ -1,0 +1,37 @@
+@model IEnumerable<ForgeFolio.Core.DTOs.Testimonial.TestimonialDto>
+@{
+    ViewData["Title"] = "Testimonials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Testimonials</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Client Name</th>
+            <th>Company</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.ClientName</td>
+                <td>@item.CompanyName</td>
+                <td>@item.Comment</td>
+                <td>
+                    <a href="/Testimonial/Update/@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/Testimonial/Delete/@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -7,12 +7,15 @@ namespace ForgeFolio.Infrastructure.Data.Repositories;
 /// Generic repository implementation providing basic CRUD operations
 /// </summary>
 /// <typeparam name="T">Entity type</typeparam>
+using ForgeFolio.Infrastructure.Data.Context;
+
+// ...
 public class GenericRepository<T> : IRepository<T> where T : class
 {
-    protected readonly DbContext _context;
+    protected readonly ApplicationDbContext _context;
     protected readonly DbSet<T> _dbSet;
 
-    public GenericRepository(DbContext context)
+    public GenericRepository(ApplicationDbContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _dbSet = _context.Set<T>();
@@ -69,5 +72,11 @@ public class GenericRepository<T> : IRepository<T> where T : class
             query = query.Where(filter);
         }
         return await query.CountAsync();
+        return await query.CountAsync();
+    }
+
+    public virtual IQueryable<T> GetQueryable()
+    {
+        return _dbSet.AsQueryable();
     }
 }

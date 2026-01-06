@@ -1,0 +1,34 @@
+@model ForgeFolio.Core.DTOs.About.AboutDto
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="float-start">About Me</h2>
+        <a href="/About/Update/@Model?.Id" class="btn btn-primary float-end">Edit</a>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        @if (Model != null)
+        {
+            <dl class="row">
+                <dt class="col-sm-3">Title</dt>
+                <dd class="col-sm-9">@Model.Title</dd>
+
+                <dt class="col-sm-3">Sub Description</dt>
+                <dd class="col-sm-9">@Model.SubDescription</dd>
+
+                <dt class="col-sm-3">Details</dt>
+                <dd class="col-sm-9">@Model.Details</dd>
+            </dl>
+        }
+        else
+        {
+            <div class="alert alert-warning">No about information found.</div>
+        }
+    </div>
+</div>
