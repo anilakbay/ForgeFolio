@@ -13,10 +13,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <!-- Custom Lux Modern Theme -->
     <link rel="stylesheet" href="~/css/admin-theme-custom.css">
+    <!-- Page-Specific Themes -->
+    <link rel="stylesheet" href="~/css/page-themes.css">
     <!-- Chart.js -->
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed sidebar-light-primary">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-light-primary @ViewData["BodyClass"]">
     <div class="wrapper">
 
         <!-- Navbar -->
