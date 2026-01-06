@@ -1,41 +1,60 @@
-﻿@model Experience
-@{
-    ViewData["Title"] = "CreateExperience";
-    Layout = "~/Views/Layout/Index.cshtml";
+﻿@{
+    ViewData["Title"] = "Yeni Deneyim Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["PageIcon"] = "🎓";
 }
 
-<div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Experiences</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-header">
-						<div class="card-title">Experience Addition Page</div>
-					</div>
-					<div class="card-body">
-						
-
-						<form method="post">
-							<label>Firma Bilgisi</label>
-                            <input type="text" class="form-control" asp-for="Head" />
-							<br />
-							<label>Çalışılan Pozisyon</label>
-							<input type="text" class="form-control" asp-for="Title" />
-							<br />
-							<label>Tarih Aralığı</label>
-							<input type="text" class="form-control" asp-for="Date" />
-							<br />
-							<label>Açıklama</label>
-                            <textarea rows="4" class="form-control" asp-for="Description"></textarea>
-							<br />
-							<button class="btn btn-primary">Add Experience</button>
-						</form>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Yeni Deneyim Ekle</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index">Experience</a></li>
+                    <li class="breadcrumb-item active">Yeni Ekle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
 
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white;">
+                <h3 class="card-title">Deneyim Bilgileri</h3>
+            </div>
+            <form method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="head">Pozisyon</label>
+                        <input type="text" class="form-control" id="head" name="Head" placeholder="Örn: Senior Developer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Şirket</label>
+                        <input type="text" class="form-control" id="title" name="Title" placeholder="Örn: Tech Company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tarih</label>
+                        <input type="text" class="form-control" id="date" name="Date" placeholder="Örn: 2020 - 2026">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Açıklama</label>
+                        <textarea class="form-control" id="description" name="Description" rows="5" placeholder="İş tanımınızı yazın..."></textarea>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn text-white" style="background: #8b5cf6; border-color: #8b5cf6;">
+                        <i class="fas fa-save"></i> Kaydet
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> İptal
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

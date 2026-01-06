@@ -27,11 +27,27 @@ namespace ForgeFolio.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CreateFeature(string Title, string Header, string Description)
+        {
+            // TODO: Service integration
+            TempData["SuccessMessage"] = "Feature başarıyla eklendi!";
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public IActionResult UpdateFeature(int id)
         {
             // TODO: Fetch feature by id and return edit form
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateFeature(int id, string Title, string Header, string Description)
+        {
+            // TODO: Service integration
+            TempData["SuccessMessage"] = "Feature başarıyla güncellendi!";
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
