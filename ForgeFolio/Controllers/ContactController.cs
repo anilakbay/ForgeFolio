@@ -1,34 +1,40 @@
-using ForgeFolio.DAL.Context;
-using ForgeFolio.DAL.Entities;
+using ForgeFolio.Core.DTOs.Message;
+using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForgeFolio.Controllers
-{
-    public class ContactController : Controller
-    {
-        private readonly MyPortfolioContext _context;
+namespace ForgeFolio.Controllers;
 
-        public ContactController(MyPortfolioContext context)
+/// <summary>
+/// Contact form submission controller
+/// </summary>
+public class ContactController : Controller
+{
+    private readonly IMessageService _messageService;
+
+    public ContactController(IMessageService messageService)
+    {
+        _messageService = messageService;
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SendMessage(CreateMessageDto dto)
+    {
+        if (!ModelState.IsValid)
         {
-            _context = context;
+            TempData["ErrorMessage"] = "Please fill in all required fields correctly.";
+            return RedirectToAction("Index", "Default");
         }
 
-        [HttpPost]
-        public IActionResult SendMessage(Message message)
+        try
         {
-            if (ModelState.IsValid)
-            {
-                message.MessageDate = DateTime.Now;
-                message.IsRead = false;
-                
-                _context.Messages.Add(message);
-                _context.SaveChanges();
-                
-                TempData["SuccessMessage"] = "Your message has been sent successfully!";
-                return RedirectToAction("Index", "Default");
-            }
-            
-            TempData["ErrorMessage"] = "Please fill in all required fields.";
+            await _messageService.CreateMessageAsync(dto);
+            TempData["SuccessMessage"] = "Your message has been sent successfully! We'll get back to you soon.";
+            return RedirectToAction("Index", "Default");
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"An error occurred while sending your message: {ex.Message}";
             return RedirectToAction("Index", "Default");
         }
     }

@@ -1,45 +1,89 @@
-﻿using ForgeFolio.DAL.Context;
+﻿using ForgeFolio.Core.DTOs.Message;
+using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForgeFolio.Controllers
+namespace ForgeFolio.Controllers;
+
+/// <summary>
+/// Message management controller
+/// </summary>
+public class MessageController : Controller
 {
-    public class MessageController : Controller
+    private readonly IMessageService _messageService;
+
+    public MessageController(IMessageService messageService)
     {
-        private readonly MyPortfolioContext _context;
+        _messageService = messageService;
+    }
 
-        public MessageController(MyPortfolioContext context)
+    public async Task<IActionResult> Inbox()
+    {
+        var messages = await _messageService.GetAllMessagesAsync();
+        ViewBag.UnreadCount = await _messageService.GetUnreadCountAsync();
+        return View(messages);
+    }
+
+    public async Task<IActionResult> MarkAsRead(int id)
+    {
+        try
         {
-            _context = context;
+            await _messageService.MarkAsReadAsync(id);
+            TempData["SuccessMessage"] = "Message marked as read.";
+        }
+        catch (KeyNotFoundException)
+        {
+            TempData["ErrorMessage"] = "Message not found!";
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error: {ex.Message}";
         }
 
-        public IActionResult Inbox()
+        return RedirectToAction(nameof(Inbox));
+    }
+
+    public async Task<IActionResult> MarkAsUnread(int id)
+    {
+        try
         {
-            var values = _context.Messages.ToList();
-            return View(values);
+            await _messageService.MarkAsUnreadAsync(id);
+            TempData["SuccessMessage"] = "Message marked as unread.";
+        }
+        catch (KeyNotFoundException)
+        {
+            TempData["ErrorMessage"] = "Message not found!";
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error: {ex.Message}";
         }
 
-        public IActionResult MarkAsRead(int id)
-        {
-            var value = _context.Messages.Find(id);
-            value.IsRead = true;
-            _context.Messages.Update(value);
-            _context.SaveChanges();
-            return RedirectToAction("Inbox");
-        }
+        return RedirectToAction(nameof(Inbox));
+    }
 
-        public IActionResult MarkAsUnread(int id)
+    public async Task<IActionResult> Details(int id)
+    {
+        try
         {
-            var value = _context.Messages.Find(id);
-            value.IsRead = false;
-            _context.Messages.Update(value);
-            _context.SaveChanges();
-            return RedirectToAction("Inbox");
-        }
+            var message = await _messageService.GetMessageByIdAsync(id);
+            if (message == null)
+            {
+                TempData["ErrorMessage"] = "Message not found!";
+                return RedirectToAction(nameof(Inbox));
+            }
 
-        public IActionResult Details(int id)
+            // Auto mark as read when viewing details
+            if (!message.IsRead)
+            {
+                await _messageService.MarkAsReadAsync(id);
+            }
+
+            return View(message);
+        }
+        catch (Exception ex)
         {
-            var value = _context.Messages.Find(id);
-            return View(value);
+            TempData["ErrorMessage"] = $"Error loading message: {ex.Message}";
+            return RedirectToAction(nameof(Inbox));
         }
     }
 }

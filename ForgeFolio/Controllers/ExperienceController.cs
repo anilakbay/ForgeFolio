@@ -1,62 +1,123 @@
-﻿using ForgeFolio.DAL.Context;
-using ForgeFolio.DAL.Entities;
+﻿using ForgeFolio.Core.DTOs.Experience;
+using ForgeFolio.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForgeFolio.Controllers
+namespace ForgeFolio.Controllers;
+
+/// <summary>
+/// Experience management controller
+/// </summary>
+public class ExperienceController : Controller
 {
-    public class ExperienceController : Controller
+    private readonly IExperienceService _experienceService;
+
+    public ExperienceController(IExperienceService experienceService)
     {
-        private readonly MyPortfolioContext _context;
+        _experienceService = experienceService;
+    }
 
-        public ExperienceController(MyPortfolioContext context)
+    public async Task<IActionResult> ExperienceList()
+    {
+        var experiences = await _experienceService.GetAllExperiencesAsync();
+        return View(experiences);
+    }
+
+    [HttpGet]
+    public IActionResult CreateExperience()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateExperience(CreateExperienceDto dto)
+    {
+        if (!ModelState.IsValid)
         {
-            _context = context;
+            return View(dto);
         }
 
-        public IActionResult ExperienceList()
+        try
         {
-            var values = _context.Experiences.ToList();
-            return View(values);
+            await _experienceService.CreateExperienceAsync(dto);
+            TempData["SuccessMessage"] = "Experience created successfully!";
+            return RedirectToAction(nameof(ExperienceList));
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error creating experience: {ex.Message}";
+            return View(dto);
+        }
+    }
+
+    public async Task<IActionResult> DeleteExperience(int id)
+    {
+        try
+        {
+            await _experienceService.DeleteExperienceAsync(id);
+            TempData["SuccessMessage"] = "Experience deleted successfully!";
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error deleting experience: {ex.Message}";
         }
 
-        [HttpGet]
-        public IActionResult CreateExperience()
-        {
-            return View();
-        }
+        return RedirectToAction(nameof(ExperienceList));
+    }
 
-        [HttpPost]
-        public IActionResult CreateExperience(Experience experience)
+    [HttpGet]
+    public async Task<IActionResult> UpdateExperience(int id)
+    {
+        try
         {
-            _context.Experiences.Add(experience);
-            _context.SaveChanges();
-            return RedirectToAction("ExperienceList");
-        }
-
-        public IActionResult DeleteExperience(int id)
-        {
-            var value = _context.Experiences.Find(id);
-            if (value != null)
+            var experience = await _experienceService.GetExperienceByIdAsync(id);
+            if (experience == null)
             {
-                _context.Experiences.Remove(value);
-                _context.SaveChanges();
+                TempData["ErrorMessage"] = "Experience not found!";
+                return RedirectToAction(nameof(ExperienceList));
             }
-            return RedirectToAction("ExperienceList");
+
+            var dto = new UpdateExperienceDto
+            {
+                Head = experience.Head,
+                Title = experience.Title,
+                Date = experience.Date,
+                Description = experience.Description
+            };
+
+            return View(dto);
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error loading experience: {ex.Message}";
+            return RedirectToAction(nameof(ExperienceList));
+        }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateExperience(int id, UpdateExperienceDto dto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(dto);
         }
 
-        [HttpGet]
-        public IActionResult UpdateExperience(int id)
+        try
         {
-            var value = _context.Experiences.Find(id);
-            return View(value);
+            await _experienceService.UpdateExperienceAsync(id, dto);
+            TempData["SuccessMessage"] = "Experience updated successfully!";
+            return RedirectToAction(nameof(ExperienceList));
         }
-
-        [HttpPost]
-        public IActionResult UpdateExperience(Experience experience)
+        catch (KeyNotFoundException)
         {
-            _context.Experiences.Update(experience);
-            _context.SaveChanges();
-            return RedirectToAction("ExperienceList");
+            TempData["ErrorMessage"] = "Experience not found!";
+            return RedirectToAction(nameof(ExperienceList));
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = $"Error updating experience: {ex.Message}";
+            return View(dto);
         }
     }
 }
