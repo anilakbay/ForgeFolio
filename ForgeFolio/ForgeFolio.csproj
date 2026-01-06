@@ -21,4 +21,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ForgeFolio.Core\ForgeFolio.Core.csproj" />
+    <ProjectReference Include="..\ForgeFolio.Infrastructure\ForgeFolio.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
