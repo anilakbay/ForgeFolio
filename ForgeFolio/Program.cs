@@ -1,4 +1,4 @@
-﻿using ForgeFolio.Core.Entities;
+using ForgeFolio.Core.Entities;
 using ForgeFolio.Core.Interfaces;
 using ForgeFolio.Core.Interfaces.Services;
 using ForgeFolio.Infrastructure.Data;
@@ -25,9 +25,10 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 builder.Services.AddControllersWithViews();
 
-// Database Context
+// Database Context - Switched to MySQL for Railway
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Identity Configuration
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>

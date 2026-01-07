@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForgeFolio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260107104345_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260107114955_InitialCreateMySQL")]
+    partial class InitialCreateMySQL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
