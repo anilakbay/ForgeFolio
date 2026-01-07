@@ -144,7 +144,7 @@ namespace ForgeFolio.Infrastructure.Migrations
                     Subject = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MessageDetail = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
-                    MessageDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MessageDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     IsRead = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -362,6 +362,11 @@ namespace ForgeFolio.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Abouts_IsDeleted",
+                table: "Abouts",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -399,6 +404,61 @@ namespace ForgeFolio.Infrastructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contacts_IsDeleted",
+                table: "Contacts",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Experiences_IsDeleted",
+                table: "Experiences",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Features_IsDeleted",
+                table: "Features",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_IsDeleted",
+                table: "Messages",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_IsRead",
+                table: "Messages",
+                column: "IsRead");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Portfolios_IsDeleted",
+                table: "Portfolios",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_IsDeleted",
+                table: "Skills",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SocialMedias_IsDeleted",
+                table: "SocialMedias",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Testimonials_IsDeleted",
+                table: "Testimonials",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDoLists_IsDeleted",
+                table: "ToDoLists",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDoLists_Status",
+                table: "ToDoLists",
+                column: "Status");
         }
 
         /// <inheritdoc />
