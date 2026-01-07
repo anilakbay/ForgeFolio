@@ -1,206 +1,155 @@
-/* ========================================
-   ForgeFolio Admin Panel - Lux Modern Theme
-   Premium Light Theme with Glassmorphism
-   ======================================== */
-
-/* === COLOR PALETTE === */
 :root {
-    --primary-blue: #4e73df;
-    --primary-blue-dark: #3d5abe;
-    --sidebar-bg: #ffffff;
-    --sidebar-header-gradient-start: #f8f9fc;
-    --sidebar-header-gradient-end: #e3f2fd;
-    --menu-text: #5a5c69;
-    --menu-text-active: #4e73df;
-    --menu-hover-bg: #f8f9fc;
-    --menu-active-bg: #e3f2fd;
-    --border-color: #e3e6f0;
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    --glow-blue: rgba(78, 115, 223, 0.15);
+    /* --- Modern Palette (ForgeFolio Brand) --- */
+    --primary-bg: #f4f6f9;
+    --sidebar-bg: #1a1f36; /* Deep Modern Blue */
+    --sidebar-active: #696cff; /* Vibrant Purple/Blue */
+    --card-bg: #ffffff;
+    --text-main: #344767;
+    --text-muted: #8392ab;
+    --radius-soft: 16px;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-/* === MAIN LAYOUT === */
+/* Global Font Override */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    background-color: var(--primary-bg);
+    color: var(--text-main);
 }
 
-.wrapper {
-    background-color: #f8f9fc;
-}
-
-/* === SIDEBAR BASE === */
+/* --- Sidebar Modernization --- */
 .main-sidebar {
-    background: var(--sidebar-bg) !important;
-    box-shadow: 2px 0 15px var(--shadow-light);
-    border-right: 1px solid var(--border-color);
+    background-color: var(--sidebar-bg) !important;
+    border-right: none !important;
+    box-shadow: var(--shadow-soft) !important;
 }
 
-/* === BRAND/LOGO AREA with Glassmorphism === */
 .brand-link {
-    background: linear-gradient(135deg, var(--sidebar-header-gradient-start) 0%, var(--sidebar-header-gradient-end) 100%) !important;
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0.5rem !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    background-color: rgba(0,0,0,0.1);
 }
 
-.brand-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at top left, rgba(78, 115, 223, 0.1), transparent);
-    pointer-events: none;
+.nav-sidebar .nav-item .nav-link {
+    border-radius: 12px;
+    margin-bottom: 5px;
+    color: rgba(255,255,255,0.7) !important;
+    transition: all 0.2s ease;
 }
 
-.brand-link .brand-text {
-    color: var(--primary-blue) !important;
-    font-weight: 700;
-    font-size: 1.3rem;
-    letter-spacing: -0.5px;
+.nav-sidebar .nav-item .nav-link:hover {
+    background-color: rgba(255,255,255,0.05) !important;
+    color: #fff !important;
+    transform: translateX(5px);
 }
 
-.brand-link .brand-image {
-    opacity: 1;
-    filter: drop-shadow(0 2px 4px rgba(78, 115, 223, 0.2));
+.nav-sidebar .nav-item .nav-link.active {
+    background-color: var(--sidebar-active) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(105, 108, 255, 0.4) !important;
 }
 
-/* === SIDEBAR MENU === */
-.sidebar {
-    padding-top: 1rem;
-}
-
-.nav-sidebar .nav-item {
-    margin-bottom: 0.25rem;
-}
-
-.nav-sidebar .nav-link {
-    color: var(--menu-text) !important;
-    border-radius: 0.5rem;
-    margin: 0 0.75rem;
-    padding: 0.75rem 1rem;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 500;
-    font-size: 0.95rem;
-}
-
-/* Active border strip */
-.nav-sidebar .nav-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 0;
-    background: var(--primary-blue);
-    border-radius: 0 2px 2px 0;
-    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hover State */
-.nav-sidebar .nav-link:hover {
-    background-color: var(--menu-hover-bg) !important;
-    color: var(--menu-text-active) !important;
-    transform: translateX(4px);
-}
-
-/* Active State */
-.nav-sidebar .nav-link.active {
-    background: var(--menu-active-bg) !important;
-    color: var(--menu-text-active) !important;
-    font-weight: 600;
-    box-shadow: 0 2px 8px var(--glow-blue);
-}
-
-.nav-sidebar .nav-link.active::before {
-    height: 70%;
-}
-
-/* Icons Styling */
 .nav-sidebar .nav-icon {
-    color: inherit;
     font-size: 1.1rem;
-    margin-right: 0.75rem;
-    transition: transform 0.3s ease;
+    margin-right: 10px;
 }
 
-.nav-sidebar .nav-link:hover .nav-icon {
-    transform: scale(1.1);
-}
-
-.nav-sidebar .nav-link.active .nav-icon {
-    color: var(--primary-blue);
-}
-
-/* === MAIN HEADER === */
+/* --- Navbar Polish --- */
 .main-header {
-    background: white !important;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 1px 3px var(--shadow-light);
+    border-bottom: none !important;
+    background-color: #fff !important;
+    box-shadow: var(--shadow-soft);
 }
 
-.main-header .navbar-nav .nav-link {
-    color: var(--menu-text) !important;
-}
-
-/* === CONTENT AREA === */
-.content-wrapper {
-    background: #f8f9fc;
-}
-
-.content-header h1 {
-    color: #2e3a4e;
-    font-weight: 700;
-}
-
-/* === CARDS === */
+/* --- Card Modernization --- */
 .card {
-    border: none;
-    box-shadow: 0 2px 4px var(--shadow-light);
-    border-radius: 0.5rem;
+    border: none !important;
+    border-radius: var(--radius-soft) !important;
+    box-shadow: var(--shadow-soft) !important;
+    transition: transform 0.2s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover) !important;
 }
 
 .card-header {
-    background: white;
-    border-bottom: 1px solid var(--border-color);
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+    padding: 1.25rem 1.5rem !important;
+}
+
+.card-title {
     font-weight: 600;
-    color: #2e3a4e;
+    color: var(--text-main);
 }
 
-/* === SCROLLBAR === */
-.sidebar::-webkit-scrollbar {
-    width: 6px;
+/* --- Table Polish --- */
+.table thead th {
+    border-top: none;
+    border-bottom: 2px solid #e9ecef !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
 }
 
-.sidebar::-webkit-scrollbar-track {
-    background: transparent;
+.table td {
+    vertical-align: middle !important;
+    font-size: 0.9rem;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
-    background: rgba(78, 115, 223, 0.3);
-    border-radius: 10px;
+/* --- Button Upgrades --- */
+.btn {
+    border-radius: 10px !important;
+    font-weight: 500;
+    padding: 0.5rem 1.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
-    background: rgba(78, 115, 223, 0.5);
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-    .main-sidebar {
-        box-shadow: 4px 0 20px var(--shadow-light);
-    }
+.btn-success {
+    background-color: #2dce89;
+    border-color: #2dce89;
 }
 
-/* === SMOOTH TRANSITIONS === */
-* {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.btn-info {
+    background-color: #11cdef;
+    border-color: #11cdef;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #f5365c;
+    border-color: #f5365c;
+}
+
+/* --- Badge Modernization --- */
+.badge {
+    padding: 0.5em 0.8em;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* --- Dashboard Specifics --- */
+.small-box {
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    border: none;
+}
+
+.small-box .icon {
+    opacity: 0.2;
+}
+
+.small-box:hover {
+    transform: translateY(-5px);
 }

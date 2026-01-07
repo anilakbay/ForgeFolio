@@ -1,329 +1,141 @@
-﻿
-@model ForgeFolio.Core.DTOs.Statistic.StatisticDto
+﻿@model ForgeFolio.Core.DTOs.Statistic.StatisticDto
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Layout/Index.cshtml";
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["BodyClass"] = "page-dashboard";
 }
 
-<div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Statistics</h4>
-		<div class="row">
-			<div class="col-md-3">
-				<div class="card card-stats card-warning">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-users"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Number of Skills</p>
-									<h4 class="card-title">@Model.TotalSkills</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-success">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Total Messages</p>
-									<h4 class="card-title">@Model.TotalMessages</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-danger">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Unread</p>
-									<h4 class="card-title">@Model.UnreadMessages</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-primary">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Readings</p>
-									<h4 class="card-title">@Model.ReadMessages</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>		
-		</div>
-		<br />
-		<div class="row">
-			<div class="col-md-3">
-				<div class="card card-stats card-warning">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-users"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-success">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Sales</p>
-									<h4 class="card-title">$ 1,345</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-danger">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Subscribers</p>
-									<h4 class="card-title">1303</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-primary">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Order</p>
-									<h4 class="card-title">576</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        <br />
-		<div class="row">
-			<div class="col-md-3">
-				<div class="card card-stats card-warning">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-users"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-success">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Sales</p>
-									<h4 class="card-title">$ 1,345</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-danger">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Subscribers</p>
-									<h4 class="card-title">1303</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-primary">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Order</p>
-									<h4 class="card-title">576</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-        <br />
-		<div class="row">
-			<div class="col-md-3">
-				<div class="card card-stats card-warning">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-users"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-success">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Sales</p>
-									<h4 class="card-title">$ 1,345</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-danger">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Subscribers</p>
-									<h4 class="card-title">1303</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card card-stats card-primary">
-					<div class="card-body ">
-						<div class="row">
-							<div class="col-5">
-								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
-								</div>
-							</div>
-							<div class="col-7 d-flex align-items-center">
-								<div class="numbers">
-									<p class="card-category">Order</p>
-									<h4 class="card-title">576</h4>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark" style="font-weight: 700;">Dashboard</h1>
+                <p class="text-muted">Hoşgeldin, Admin! İşte paneline genel bakış.</p>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v2</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
 
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+            <!-- Total Skills -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="small-box bg-gradient-info">
+                    <div class="inner">
+                        <h3>@Model.TotalSkills</h3>
+                        <p>Yetenekler</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <a asp-controller="Skill" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Total Messages -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="small-box bg-gradient-success">
+                    <div class="inner">
+                        <h3>@Model.TotalMessages</h3>
+                        <p>Toplam Mesaj</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <a asp-controller="Message" asp-action="Index" class="small-box-footer">
+                        Detaylar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Unread Messages -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="small-box bg-gradient-warning">
+                    <div class="inner">
+                        <h3>@Model.UnreadMessages</h3>
+                        <p>Okunmamış Mesaj</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <a asp-controller="Message" asp-action="Index" class="small-box-footer">
+                        Gelen Kutusu <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Read Messages -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="small-box bg-gradient-danger">
+                    <div class="inner">
+                        <h3>@Model.ReadMessages</h3>
+                        <p>Okunmuş Mesaj</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <a asp-controller="Message" asp-action="Index" class="small-box-footer">
+                        Arşiv <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row mt-4">
+            <!-- Quick Actions Card -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">Hızlı İşlemler</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap gap-3" style="gap: 15px;">
+                            <a asp-controller="Portfolio" asp-action="CreatePortfolio" class="btn btn-app bg-primary text-white" style="min-width: 120px;">
+                                <i class="fas fa-plus mb-2" style="display: block; font-size: 24px;"></i> Proje Ekle
+                            </a>
+                            <a asp-controller="Skill" asp-action="CreateSkill" class="btn btn-app bg-purple text-white" style="min-width: 120px; background-color: #6f42c1;">
+                                <i class="fas fa-code mb-2" style="display: block; font-size: 24px;"></i> Yetenek Ekle
+                            </a>
+                            <a asp-controller="Experience" asp-action="CreateExperience" class="btn btn-app bg-teal text-white" style="min-width: 120px;">
+                                <i class="fas fa-graduation-cap mb-2" style="display: block; font-size: 24px;"></i> Deneyim Ekle
+                            </a>
+                             <a href="/" target="_blank" class="btn btn-app bg-dark text-white" style="min-width: 120px;">
+                                <i class="fas fa-globe mb-2" style="display: block; font-size: 24px;"></i> Siteye Git
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Info -->
+            <div class="col-md-4">
+                 <div class="card bg-gradient-primary">
+                    <div class="card-header border-0">
+                        <h3 class="card-title">Sistem Durumu</h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Platform:</strong> .NET 9.0</p>
+                        <p><strong>Database:</strong> MySQL (Railway)</p>
+                        <p><strong>Server Time:</strong> @DateTime.Now.ToString("dd.MM.yyyy HH:mm")</p>
+                        <div class="progress mt-3" style="height: 5px;">
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%"></div>
+                        </div>
+                        <p class="mt-2 mb-0" style="font-size: 0.9rem;">All systems operational ✅</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
