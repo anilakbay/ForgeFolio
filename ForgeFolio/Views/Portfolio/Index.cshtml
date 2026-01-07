@@ -4,18 +4,18 @@
     ViewData["Title"] = "Portfolio Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["BodyClass"] = "page-portfolio";
-    ViewData["PageIcon"] = "💼";
 }
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Portfolio Yönetimi</h1>
+                <h1 class="m-0 font-weight-bold text-dark">Portfolio Yönetimi</h1>
+                <p class="text-muted">Projelerinizi buradan yönetebilirsiniz.</p>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/Statistic/Index">Dashboard</a></li>
                     <li class="breadcrumb-item active">Portfolio</li>
                 </ol>
             </div>
@@ -27,61 +27,97 @@
     <div class="container-fluid">
         @await Html.PartialAsync("_TempDataMessages")
         
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Portfolio Listesi</h3>
-                <div class="card-tools">
-                    <a asp-action="CreatePortfolio" class="btn btn-success btn-sm">
-                        <i class="fas fa-plus"></i> Yeni Ekle
-                    </a>
+        <div class="card shadow-sm border-0">
+            <div class="card-header border-0 bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title text-primary font-weight-bold">
+                        <i class="fas fa-briefcase mr-2"></i> Proje Listesi
+                    </h3>
+                    <div class="card-tools">
+                        <a asp-action="CreatePortfolio" class="btn btn-primary btn-sm rounded-pill px-4 shadow-sm">
+                            <i class="fas fa-plus mr-1"></i> Yeni Proje Ekle
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 @if (Model != null && Model.Any())
                 {
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Başlık</th>
-                                <th>Alt Başlık</th>
-                                <th>Tarih</th>
-                                <th>İşlemler</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless align-middle mb-0">
+                            <thead class="bg-light text-muted">
                                 <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.Title</td>
-                                    <td>@item.SubTitle</td>
-                                    <td>@item.CreatedAt.ToString("dd.MM.yyyy")</td>
-                                    <td>
-                                        <a asp-action="UpdatePortfolio" asp-route-id="@item.Id" class="btn btn-info btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a asp-action="DeletePortfolio" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
-                                           onclick="return confirm('Bu portfolyoyu silmek istediğinize emin misiniz?')">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    <th class="pl-4" style="width: 50px;">#</th>
+                                    <th style="width: 100px;">Görsel</th>
+                                    <th>Proje Bilgileri</th>
+                                    <th>Tarih</th>
+                                    <th class="text-right pr-4" style="width: 150px;">İşlemler</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="border-bottom">
+                                        <td class="pl-4 font-weight-bold text-muted">@item.Id</td>
+                                        <td>
+                                            @if(!string.IsNullOrEmpty(item.ImageUrl))
+                                            {
+                                                <img src="@item.ImageUrl" class="rounded shadow-sm" style="width: 60px; height: 60px; object-fit: cover;" alt="@item.Title">
+                                            }
+                                            else
+                                            {
+                                                <div class="bg-light rounded d-flex align-items-center justify-content-center text-muted" style="width: 60px; height: 60px;">
+                                                    <i class="fas fa-image"></i>
+                                                </div>
+                                            }
+                                        </td>
+                                        <td>
+                                            <h5 class="mb-1 font-weight-bold text-dark">@item.Title</h5>
+                                            <span class="badge badge-light text-muted border">@item.SubTitle</span>
+                                            @if(!string.IsNullOrEmpty(item.ProjectUrl))
+                                            {
+                                                 <a href="@item.ProjectUrl" target="_blank" class="text-xs ml-2 text-info"><i class="fas fa-external-link-alt"></i> Link</a>
+                                            }
+                                        </td>
+                                        <td class="text-muted">
+                                            <i class="far fa-clock mr-1"></i> @item.CreatedAt.ToString("dd MMM yyyy")
+                                        </td>
+                                        <td class="text-right pr-4">
+                                            <div class="btn-group">
+                                                <a asp-action="UpdatePortfolio" asp-route-id="@item.Id" class="btn btn-sm btn-light text-info mr-2" title="Düzenle">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a asp-action="DeletePortfolio" asp-route-id="@item.Id" class="btn btn-sm btn-light text-danger" 
+                                                   onclick="return confirm('Bu projeyi silmek istediğinize emin misiniz?')" title="Sil">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 }
                 else
                 {
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i> Henüz portfolio yok. "Yeni Ekle" butonuna tıklayarak başlayın!
+                    <div class="text-center py-5">
+                        <div class="mb-3">
+                            <span class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                <i class="fas fa-folder-open fa-2x text-muted"></i>
+                            </span>
+                        </div>
+                        <h4 class="text-muted">Henüz hiç proje eklenmemiş.</h4>
+                        <p class="text-muted mb-4">Portfolyonuzu oluşturmaya başlamak için ilk projenizi ekleyin.</p>
+                        <a asp-action="CreatePortfolio" class="btn btn-primary rounded-pill px-4">
+                            <i class="fas fa-plus mr-1"></i> İlk Projeyi Ekle
+                        </a>
                     </div>
                 }
             </div>
-        </div>
-
-        <div class="alert alert-secondary">
-            <i class="fas fa-database"></i> <strong>Not:</strong> Portfolio listesi veritabanından dinamik olarak yüklenmektedir.
+            <div class="card-footer bg-white border-0 py-3">
+                <small class="text-muted"><i class="fas fa-info-circle mr-1"></i> Toplam <strong>@(Model?.Count() ?? 0)</strong> proje listeleniyor.</small>
+            </div>
         </div>
     </div>
 </section>
