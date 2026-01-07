@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForgeFolio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260106224609_InitialCreate")]
+    [Migration("20260107104345_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -61,6 +61,8 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Abouts");
                 });
@@ -180,6 +182,8 @@ namespace ForgeFolio.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Contacts");
                 });
 
@@ -223,6 +227,8 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Experiences");
                 });
@@ -270,6 +276,8 @@ namespace ForgeFolio.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Features");
                 });
 
@@ -299,7 +307,9 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("MessageDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("MessageDetail")
                         .IsRequired()
@@ -320,6 +330,10 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("IsRead");
 
                     b.ToTable("Messages");
                 });
@@ -367,6 +381,8 @@ namespace ForgeFolio.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Portfolios");
                 });
 
@@ -399,6 +415,8 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Skills");
                 });
@@ -437,6 +455,8 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("SocialMedias");
                 });
@@ -481,6 +501,8 @@ namespace ForgeFolio.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Testimonials");
                 });
 
@@ -524,6 +546,10 @@ namespace ForgeFolio.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("Status");
 
                     b.ToTable("ToDoLists");
                 });
