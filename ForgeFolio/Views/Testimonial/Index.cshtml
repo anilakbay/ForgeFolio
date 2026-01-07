@@ -1,42 +1,4 @@
-<<<<<<< HEAD
 @model IEnumerable<ForgeFolio.Core.DTOs.Testimonial.TestimonialDto>
-@{
-    ViewData["Title"] = "Testimonials";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Testimonials</h2>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Client Name</th>
-            <th>Company</th>
-            <th>Comment</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.ClientName</td>
-                <td>@item.CompanyName</td>
-                <td>@item.Comment</td>
-                <td>
-                    <a href="/Testimonial/Update/@item.Id" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="/Testimonial/Delete/@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-=======
 @{
     ViewData["Title"] = "Testimonial Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -74,99 +36,32 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-user-circle fa-3x text-primary"></i>
-                                </div>
-                                <h5 class="text-center">John Doe</h5>
-                                <p class="text-muted text-center">CEO, Tech Company</p>
-                                <p class="text-center">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                </p>
-                                <p>"Harika bir profesyonel! Projemizi zamanında ve beklentilerin üzerinde teslim etti."</p>
-                                <div class="text-center">
-                                    <a asp-action="UpdateTestimonial" asp-route-id="1" class="btn btn-info btn-sm">
-                                        <i class="fas fa-edit"></i> Düzenle
-                                    </a>
-                                    <a asp-action="DeleteTestimonial" asp-route-id="1" class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
-                                        <i class="fas fa-trash"></i> Sil
-                                    </a>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://via.placeholder.com/150" : item.ImageUrl)" alt="@item.ClientName" class="img-circle img-fluid" style="width: 100px; height: 100px;">
+                                    </div>
+                                    <h5 class="text-center">@item.ClientName</h5>
+                                    <p class="text-muted text-center">@item.CompanyName</p>
+                                    <p class="text-center">" @item.Comment "</p>
+                                    <div class="text-center">
+                                        <a asp-action="UpdateTestimonial" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i> Düzenle
+                                        </a>
+                                        <a asp-action="DeleteTestimonial" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
+                                            <i class="fas fa-trash"></i> Sil
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-user-circle fa-3x text-success"></i>
-                                </div>
-                                <h5 class="text-center">Jane Smith</h5>
-                                <p class="text-muted text-center">CTO, StartUp Inc</p>
-                                <p class="text-center">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="far fa-star text-warning"></i>
-                                </p>
-                                <p>"Teknik bilgisi ve problem çözme yetenekleri mükemmel. Kesinlikle tavsiye ederim!"</p>
-                                <div class="text-center">
-                                    <a asp-action="UpdateTestimonial" asp-route-id="2" class="btn btn-info btn-sm">
-                                        <i class="fas fa-edit"></i> Düzenle
-                                    </a>
-                                    <a asp-action="DeleteTestimonial" asp-route-id="2" class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
-                                        <i class="fas fa-trash"></i> Sil
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-user-circle fa-3x text-warning"></i>
-                                </div>
-                                <h5 class="text-center">Mike Johnson</h5>
-                                <p class="text-muted text-center">Product Manager, Digital Solutions</p>
-                                <p class="text-center">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                </p>
-                                <p>"Birlikte çalışmak çok keyifliydi. İletişimi güçlü, sonuç odaklı çalışıyor."</p>
-                                <div class="text-center">
-                                    <a asp-action="UpdateTestimonial" asp-route-id="3" class="btn btn-info btn-sm">
-                                        <i class="fas fa-edit"></i> Düzenle
-                                    </a>
-                                    <a asp-action="DeleteTestimonial" asp-route-id="3" class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Bu testimonial silinecek, emin misiniz?')">
-                                        <i class="fas fa-trash"></i> Sil
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
-
-        <div class="alert alert-secondary">
-            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Sample data gösteriliyor. Servis entegrasyonu için controller'daki TODO'ları inceleyin.
-        </div>
     </div>
 </section>
->>>>>>> anildev

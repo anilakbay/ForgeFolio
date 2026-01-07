@@ -14,17 +14,29 @@ namespace ForgeFolio.Controllers
             _aboutService = aboutService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // TODO: Fetch real data - var about = await _aboutService.GetAboutAsync();
-            return View();
+            var about = await _aboutService.GetAboutAsync();
+            return View(about);
         }
 
         [HttpPost]
-        public IActionResult UpdateAbout(string Title, string SubDescription, string Details)
+        public async Task<IActionResult> UpdateAbout(ForgeFolio.Core.DTOs.About.UpdateAboutDto dto)
         {
-            // TODO: Service integration - await _aboutService.UpdateAboutAsync(dto);
-            TempData["SuccessMessage"] = "About bilgileri başarıyla güncellendi!";
+            if (!ModelState.IsValid)
+            {
+               return View("Index", await _aboutService.GetAboutAsync());
+            }
+
+            try
+            {
+                 await _aboutService.UpdateAboutAsync(dto);
+                 TempData["SuccessMessage"] = "Hakkımda bilgileri başarıyla güncellendi!";
+            }
+            catch (Exception ex)
+            {
+                 TempData["ErrorMessage"] = $"Hata: {ex.Message}";
+            }
             return RedirectToAction(nameof(Index));
         }
     }

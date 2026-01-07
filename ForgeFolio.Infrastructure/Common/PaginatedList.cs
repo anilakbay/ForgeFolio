@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ForgeFolio.Core.Common;
+namespace ForgeFolio.Infrastructure.Common;
 
 public class PaginatedList<T> : List<T>
 {

@@ -8,7 +8,8 @@ namespace ForgeFolio.Core.Interfaces.Services;
 public interface IPortfolioService
 {
     Task<IEnumerable<PortfolioDto>> GetAllPortfoliosAsync();
-    Task<Core.Common.PaginatedList<PortfolioDto>> GetAllPortfoliosPaginatedAsync(int pageIndex, int pageSize);
+    // Note: Paginated method removed from interface to avoid Infrastructure dependency in Core
+    // Pagination logic remains in PortfolioService implementation
     Task<PortfolioDto?> GetPortfolioByIdAsync(int id);
     Task<PortfolioDto> CreatePortfolioAsync(CreatePortfolioDto dto);
     Task UpdatePortfolioAsync(int id, UpdatePortfolioDto dto);

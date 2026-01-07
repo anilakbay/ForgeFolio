@@ -1,42 +1,4 @@
-<<<<<<< HEAD
 @model IEnumerable<ForgeFolio.Core.DTOs.Feature.FeatureDto>
-@{
-    ViewData["Title"] = "Features";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Features</h2>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Header</th>
-            <th>Name Surname</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Title</td>
-                <td>@item.Header</td>
-                <td>@item.NameSurname</td>
-                <td>
-                    <a href="/Feature/Update/@item.Id" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="/Feature/Delete/@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-=======
 @{
     ViewData["Title"] = "Özellikler";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -56,7 +18,8 @@
                     <li class="breadcrumb-item active">Features</li>
                 </ol>
             </div>
-</div>
+        </div>
+    </div>
 </div>
 
 <section class="content">
@@ -79,42 +42,32 @@
                             <th>ID</th>
                             <th>Başlık</th>
                             <th>İkon</th>
+                            <th>Açıklama</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Responsive Tasarım</td>
-                            <td><i class="fas fa-mobile-alt"></i></td>
-                            <td>
-                                <a asp-action="UpdateFeature" asp-route-id="1" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="DeleteFeature" asp-route-id="1" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Bu feature öğesini silmek istediğinize emin misiniz?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Modern UI/UX</td>
-                            <td><i class="fas fa-paint-brush"></i></td>
-                            <td>
-                                <a asp-action="UpdateFeature" asp-route-id="2" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="DeleteFeature" asp-route-id="2" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Bu feature öğesini silmek istediğinize emin misiniz?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Title</td>
+                                <td><i class="@item.Icon"></i> @item.Icon</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <a asp-action="UpdateFeature" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="DeleteFeature" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu özelliği silmek istediğinize emin misiniz?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </section>
->>>>>>> anildev

@@ -2,6 +2,7 @@ using ForgeFolio.Core.DTOs.Portfolio;
 using ForgeFolio.Core.Entities;
 using ForgeFolio.Core.Interfaces;
 using ForgeFolio.Core.Interfaces.Services;
+using ForgeFolio.Infrastructure.Common;
 
 namespace ForgeFolio.Infrastructure.Services;
 
@@ -34,7 +35,7 @@ public class PortfolioService : IPortfolioService
         });
     }
 
-    public async Task<Core.Common.PaginatedList<PortfolioDto>> GetAllPortfoliosPaginatedAsync(int pageIndex, int pageSize)
+    public async Task<PaginatedList<PortfolioDto>> GetAllPortfoliosPaginatedAsync(int pageIndex, int pageSize)
     {
         var query = _repository.GetQueryable().Select(p => new PortfolioDto
         {
@@ -50,7 +51,7 @@ public class PortfolioService : IPortfolioService
         // Add default ordering
         query = query.OrderByDescending(x => x.CreatedAt);
 
-        return await Core.Common.PaginatedList<PortfolioDto>.CreateAsync(query, pageIndex, pageSize);
+        return await PaginatedList<PortfolioDto>.CreateAsync(query, pageIndex, pageSize);
     }
 
     public async Task<PortfolioDto?> GetPortfolioByIdAsync(int id)

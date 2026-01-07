@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> anildev
 namespace ForgeFolio.Core.DTOs.Skill;
 
 public class SkillDto
@@ -19,10 +15,7 @@ public class CreateSkillDto
 
 public class UpdateSkillDto
 {
-<<<<<<< HEAD
     public int Id { get; set; }
-=======
->>>>>>> anildev
     public string Title { get; set; } = string.Empty;
     public int Value { get; set; }
 }
