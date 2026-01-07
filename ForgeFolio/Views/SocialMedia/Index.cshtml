@@ -1,3 +1,4 @@
+@model IEnumerable<ForgeFolio.Core.DTOs.SocialMedia.SocialMediaDto>
 @{
     ViewData["Title"] = "Sosyal Medya Yönetimi";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -38,65 +39,34 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Platform</th>
-                            <th>URL</th>
+                            <th>Başlık</th>
                             <th>İkon</th>
+                            <th>URL</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>LinkedIn</td>
-                            <td>https://linkedin.com/in/anilakbay</td>
-                            <td><i class="fab fa-linkedin" style="font-size: 1.5rem; color: #0077b5;"></i></td>
-                            <td>
-                                <a asp-action="UpdateSocialMedia" asp-route-id="1" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="DeleteSocialMedia" asp-route-id="1" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>GitHub</td>
-                            <td>https://github.com/anilakbay</td>
-                            <td><i class="fab fa-github" style="font-size: 1.5rem; color: #333;"></i></td>
-                            <td>
-                                <a asp-action="UpdateSocialMedia" asp-route-id="2" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="DeleteSocialMedia" asp-route-id="2" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Twitter</td>
-                            <td>https://twitter.com/anilakbay</td>
-                            <td><i class="fab fa-twitter" style="font-size: 1.5rem; color: #1da1f2;"></i></td>
-                            <td>
-                                <a asp-action="UpdateSocialMedia" asp-route-id="3" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a asp-action="DeleteSocialMedia" asp-route-id="3" class="btn btn-danger btn-sm"
-                                   onclick="return confirm('Bu sosyal medya hesabını silmek istediğinize emin misiniz?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Title</td>
+                                <td><i class="@item.Icon" style="font-size: 1.2rem;"></i> @item.Icon</td>
+                                <td><a href="@item.Url" target="_blank">Link</a></td>
+                                <td>
+                                    <a asp-action="UpdateSocialMedia" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="DeleteSocialMedia" asp-route-id="@item.Id" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="alert alert-secondary">
-            <i class="fas fa-info-circle"></i> <strong>Not:</strong> Sample data gösteriliyor. Servis entegrasyonu için controller'daki TODO'ları inceleyin.
         </div>
     </div>
 </section>

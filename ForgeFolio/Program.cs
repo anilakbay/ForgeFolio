@@ -7,6 +7,7 @@ using ForgeFolio.Infrastructure.Data.Repositories;
 using ForgeFolio.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Serilog Configuration
 builder.Host.UseSerilog((context, configuration) => 
     configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -63,6 +71,8 @@ builder.Services.AddScoped<ISocialMediaService, SocialMediaService>();
 var app = builder.Build();
 
 app.UseMiddleware<ForgeFolio.Middleware.GlobalExceptionMiddleware>();
+
+app.UseForwardedHeaders();
 
 if (!app.Environment.IsDevelopment())
 {

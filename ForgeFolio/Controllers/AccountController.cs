@@ -92,6 +92,35 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Default");
     }
     
+    
+    [HttpGet]
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ForgotPassword(string email)
+    {
+        if (string.IsNullOrEmpty(email))
+        {
+            ModelState.AddModelError("", "E-posta adresi gereklidir.");
+            return View();
+        }
+
+        var user = await _userManager.FindByEmailAsync(email);
+        
+        // Güvenlik: Kullanıcı bulunmasa bile başarılı mesajı göster
+        // (Email'in sistemde olup olmadığını açığa vurmamak için)
+        TempData["SuccessMessage"] = "Eğer bu e-posta adresi sistemimizde kayıtlıysa, şifre sıfırlama talimatları gönderilecektir.";
+        
+        // TODO: Gerçek uygulamada burada email gönderimi yapılır
+        // PasswordResetToken oluştur ve email'e gönder
+        
+        return View();
+    }
+    
     [HttpGet]
     public IActionResult AccessDenied()
     {

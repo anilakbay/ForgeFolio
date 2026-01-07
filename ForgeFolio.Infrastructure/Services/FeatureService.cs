@@ -38,7 +38,7 @@ public class FeatureService : IFeatureService
             Id = feature.Id,
             Title = feature.Title,
             Description = feature.Description,
-Icon = feature.Icon
+            Icon = feature.Icon
         };
     }
 

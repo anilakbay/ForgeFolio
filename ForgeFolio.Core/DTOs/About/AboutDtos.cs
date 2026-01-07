@@ -8,6 +8,13 @@ public class AboutDto
     public string Details { get; set; } = string.Empty;
 }
 
+public class CreateAboutDto
+{
+    public string Title { get; set; } = string.Empty;
+    public string SubDescription { get; set; } = string.Empty;
+    public string Details { get; set; } = string.Empty;
+}
+
 public class UpdateAboutDto
 {
     public string Title { get; set; } = string.Empty;

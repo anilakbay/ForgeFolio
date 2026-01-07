@@ -15,4 +15,5 @@ public interface IRepository<T> where T : class
     Task DeleteAsync(int id);
     Task<bool> ExistsAsync(int id);
     Task<int> CountAsync(Expression<Func<T, bool>>? filter = null);
+    IQueryable<T> GetQueryable();
 }
